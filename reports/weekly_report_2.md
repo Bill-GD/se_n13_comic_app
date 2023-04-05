@@ -28,12 +28,12 @@ Learn Flutter to connect Backend with Frontend
 
 ### Dự định tuần tới
 ## Hoàng Trung Thắng
-
 ### Tuần trước làm gì
-
+Xây dựng UI login, logout, sign up, quên password kết nối firebase google cho android
 ### Khó khăn gặp phải
-
+Tìm hiểu nhiều nguồn trên internet
 ### Dự định tuần tới
+Xây dựng tiếp các UI khác ...
 ## Dương Thành Đạt
 
 ### Tuần trước làm gì
