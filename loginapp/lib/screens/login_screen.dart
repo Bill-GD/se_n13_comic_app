@@ -59,7 +59,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     const SizedBox(height: 16),
                     CustomTextField(
                       controller: emailController,
-                      hintText: 'Email ID',
+                      hintText: 'Email',
                       prefixIcon: Icon(Icons.alternate_email, color: kGreyBlue),
                       keyboardType: TextInputType.emailAddress,
                       inputAction: TextInputAction.next,
@@ -68,13 +68,11 @@ class _LoginScreenState extends State<LoginScreen> {
                     CustomTextField(
                       controller: passwordController,
                       hintText: 'Password',
-                      prefixIcon: Icon(Icons.lock, color: kGreyBlue),
+                      prefixIcon: Icon(Icons.password, color: kGreyBlue),
                       obscureText: obscureText,
                       suffixIcon: InkWell(
                         child: Icon(
-                          obscureText == true
-                              ? Icons.visibility
-                              : Icons.visibility_off,
+                          obscureText == true ? Icons.visibility : Icons.visibility_off,
                           color: kGreyBlue,
                         ),
                         onTap: () {
@@ -94,8 +92,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) =>
-                                    const ForgotPasswordScreen(),
+                                builder: (context) => const ForgotPasswordScreen(),
                               ),
                             );
                           },
@@ -158,9 +155,8 @@ class _LoginScreenState extends State<LoginScreen> {
                       height: 48,
                       child: ElevatedButton.icon(
                         onPressed: () {
-                          final provider = Provider.of<GoogleSignInProvider>(
-                              context,
-                              listen: false);
+                          final provider =
+                              Provider.of<GoogleSignInProvider>(context, listen: false);
                           provider.googleLogin();
                           // Navigator.push(
                           //   context,

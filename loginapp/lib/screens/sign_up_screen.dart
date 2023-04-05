@@ -13,15 +13,14 @@ class SignUpScreen extends StatefulWidget {
 }
 
 class _SignUpScreenState extends State<SignUpScreen> {
+  bool obscureText = true;
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController nameController = TextEditingController();
 
   void signUpUser() async {
     FirebaseAuthMethods(FirebaseAuth.instance).signUpWithEmail(
-        email: emailController.text,
-        password: passwordController.text,
-        context: context);
+        email: emailController.text, password: passwordController.text, context: context);
   }
 
   @override
@@ -53,7 +52,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 const SizedBox(height: 16),
                 CustomTextField(
                   controller: emailController,
-                  hintText: 'Email ID',
+                  hintText: 'Email',
                   prefixIcon: Icon(Icons.alternate_email, color: kGreyBlue),
                   keyboardType: TextInputType.emailAddress,
                   inputAction: TextInputAction.next,
@@ -61,10 +60,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 const SizedBox(height: 14),
                 CustomTextField(
                   controller: nameController,
-                  hintText: 'Full Name',
+                  hintText: 'Username',
                   prefixIcon: Icon(Icons.person, color: kGreyBlue),
                   obscureText: false,
-                  keyboardType: TextInputType.visiblePassword,
+                  keyboardType: TextInputType.name,
                   inputAction: TextInputAction.next,
                 ),
                 const SizedBox(height: 14),
@@ -72,9 +71,19 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   controller: passwordController,
                   hintText: 'Password',
                   prefixIcon: Icon(Icons.password, color: kGreyBlue),
-                  obscureText: false,
+                  obscureText: true,
                   keyboardType: TextInputType.visiblePassword,
                   inputAction: TextInputAction.done,
+                  suffixIcon: InkWell(
+                    child: Icon(
+                      obscureText == true ? Icons.visibility : Icons.visibility_off,
+                      color: kGreyBlue,
+                    ),
+                    onTap: () {
+                      obscureText = !obscureText;
+                      setState(() {});
+                    },
+                  ),
                 ),
                 const SizedBox(height: 20),
                 RichText(
