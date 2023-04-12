@@ -23,3 +23,12 @@ Finished UI for Sign up, Login and Forgot Password
 ### Dự định tuần tới
 - Learn more Flutter components
 - Learn to connect and use Database from Dart/Flutter (potentially Firebase &larr; free cloud storage)
+
+## Hoàng Trung Thắng
+
+### Tuần trước làm gì
+- Học flutter kết nối với database
+### Khó khăn gặp phải
+
+### Dự định tuần tới
+- Build backend for project group
