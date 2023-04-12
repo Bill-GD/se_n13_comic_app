@@ -32,3 +32,10 @@ Finished UI for Sign up, Login and Forgot Password
 
 ### Dự định tuần tới
 - Build backend for project group
+
+### Dương Thành Đạt
+
+### Tuần trước làm gì
+- tìm hiểu data base
+### Dự định tuần tới
+- tạo api json
