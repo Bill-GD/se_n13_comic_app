@@ -4,7 +4,7 @@
 
 ## Overall use-case
 
-- Unregistered User/Guest
+### Unregistered User/Guest
   - Register
   - Login
     - Forgot password
@@ -12,7 +12,7 @@
     - History/Saved
     - Comment
 
-- Registered User/User
+### Registered User/User
   - Logout
   - Search
   - View Comics/Novels
@@ -22,8 +22,14 @@
   - Rate & Comment
   - Download to read while offline
 
-- Admin
+### Admin
   - Add Comics/Novels
   - Manage Comments
 
 ## Specific use-case
+
+### Guest
+
+### User
+
+### Admin

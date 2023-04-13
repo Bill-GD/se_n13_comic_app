@@ -16,7 +16,7 @@ class FirebaseAuthMethods {
           email: email, password: password);
       await sendEmailVerification(context);
     } on FirebaseAuthException catch (e) {
-      showSnackBar(context, e.message!);
+      showSnackBar(context, 'Email, Username or Password is invalid');
     }
   }
 
@@ -36,7 +36,7 @@ class FirebaseAuthMethods {
       }
       showSnackBar(context, 'Đăng nhập thành công');
     } on FirebaseException catch (e) {
-      showSnackBar(context, e.message!);
+      showSnackBar(context, 'Email or Password is invalid');
     }
   }
 
