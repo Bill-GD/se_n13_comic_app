@@ -1,7 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'screens/login_screen.dart';
-import 'package:loginapp/screens/logged_in_widget.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
