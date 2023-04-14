@@ -4,10 +4,12 @@ import 'package:loginapp/main_screen/list.dart';
 import 'package:loginapp/main_screen/preview.dart';
 import 'package:loginapp/main_screen/trending.dart';
 import 'package:loginapp/previewTrending.dart';
-
+import 'package:loginapp/constant.dart';
 import 'package:loginapp/tool/side_bar.dart';
 
 class HomeScreen extends StatefulWidget {
+  const HomeScreen({super.key});
+
   @override
   HomeScreenState createState() => HomeScreenState();
 }
@@ -125,7 +127,9 @@ class HomeScreenState extends State<HomeScreen> {
         actions: [
           IconButton(
             onPressed: () {} /*MỞ thanh tìm kiếm*/,
-            icon: const Icon(Icons.search),
+            icon: const Icon(
+              Icons.search,
+            ),
             iconSize: 40,
           ),
           IconButton(
@@ -138,48 +142,32 @@ class HomeScreenState extends State<HomeScreen> {
           )
         ],
       ),
-      drawer: SideBar(),
+      drawer: const SideBar(),
 
-/*  Trung tâm màn hình  */
+      // Main part of Screen
 
       body: ListView(
         children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              TextButton.icon(
-                label: const Text('Nổi bật'),
-                icon: const Icon(FontAwesomeIcons.fire, color: Color.fromARGB(255, 147, 51, 44)),
-                style: TextButton.styleFrom(side: const BorderSide(width: 1.0)),
-                onPressed: () {
-                  /*  Nổi bật  */
-                },
-              ),
-              TextButton.icon(
-                label: const Text('Top tháng'),
-                icon: const Icon(FontAwesomeIcons.trophy, color: Colors.yellow),
-                style: TextButton.styleFrom(
-                  side: const BorderSide(width: 1.0),
+          SizedBox(
+            height: 45,
+            child: Center(
+              child: Container(
+                decoration: const BoxDecoration(
+                  color: Color.fromARGB(159, 179, 179, 179),
+                  borderRadius: BorderRadius.all(Radius.circular(10)),
                 ),
-                onPressed: () {
-                  /*  Top tháng */
-                },
-              ),
-              TextButton.icon(
-                label: const Text('Mới'),
-                icon:
-                    const Icon(FontAwesomeIcons.exclamation, color: Color.fromARGB(255, 255, 0, 0)),
-                style: TextButton.styleFrom(
-                  side: const BorderSide(width: 1.0),
+                child: const Text(
+                  'Nổi bật',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 30,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
-                onPressed: () {
-                  /*  Mới */
-                },
               ),
-            ],
+            ),
           ),
-//thanh nổi bật
-
+          //thanh nổi bật
           SizedBox(
             height: 200,
             child: ListView.builder(
@@ -189,7 +177,7 @@ class HomeScreenState extends State<HomeScreen> {
               scrollDirection: Axis.horizontal,
               itemBuilder: (context, index) {
                 return GestureDetector(
-                  onLongPress: () => showDialog(
+                  onTap: () => showDialog(
                     context: context,
                     builder: (context) => PreviewTrending(
                         trendingImagePreview: trendingImage[index],
@@ -206,7 +194,7 @@ class HomeScreenState extends State<HomeScreen> {
             ),
           ),
 
-// dòng chữ Chương mới nhất
+          // dòng chữ Chương mới nhất
 
           Center(
             child: Container(
@@ -225,7 +213,7 @@ class HomeScreenState extends State<HomeScreen> {
             ),
           ),
 
-//danh sách truyện
+          //danh sách truyện
 
           GridView.builder(
             physics: const ScrollPhysics(),
@@ -239,7 +227,7 @@ class HomeScreenState extends State<HomeScreen> {
             shrinkWrap: true,
             itemBuilder: (context, index) {
               return GestureDetector(
-                onLongPress: () => showDialog(
+                onTap: () => showDialog(
                   context: context,
                   builder: (context) => Preview(
                     bookChild: bookTitle[index],
@@ -254,8 +242,70 @@ class HomeScreenState extends State<HomeScreen> {
                 ), //danh sách
               ); //danh sách
             },
-          )
+          ),
         ],
+      ),
+      bottomNavigationBar: BottomAppBar(
+        height: 60,
+        color: const Color.fromARGB(255, 0, 255, 132),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            ElevatedButton(
+              onPressed: () {},
+              style: ButtonStyle(
+                backgroundColor: MaterialStatePropertyAll(lightBlue),
+              ),
+              child: Row(
+                children: const [
+                  Icon(
+                    FontAwesomeIcons.fire,
+                    color: Color.fromARGB(255, 147, 51, 44),
+                  ),
+                  SizedBox(width: 5),
+                  Text('Nổi bật'),
+                  // style: TextButton.styleFrom(side: const BorderSide(width: 1.0)),
+                  // onPressed: () {},
+                  /*  Nổi bật  */
+                ],
+              ),
+            ),
+            const SizedBox(width: 20),
+            ElevatedButton(
+              onPressed: () {},
+              style: ButtonStyle(
+                backgroundColor: MaterialStatePropertyAll(lightBlue),
+              ),
+              child: Row(
+                children: const [
+                  Icon(
+                    FontAwesomeIcons.trophy,
+                    color: Colors.yellow,
+                  ),
+                  SizedBox(width: 10),
+                  Text('Top tháng'),
+                ],
+              ),
+            ),
+            const SizedBox(width: 20),
+            ElevatedButton(
+              onPressed: () {},
+              style: ButtonStyle(
+                backgroundColor: MaterialStatePropertyAll(lightBlue),
+              ),
+              child: Row(
+                children: const [
+                  Icon(
+                    FontAwesomeIcons.exclamation,
+                    color: Color(0xFFFF0000),
+                  ),
+                  SizedBox(width: 5),
+                  Text('Mới'),
+                ],
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

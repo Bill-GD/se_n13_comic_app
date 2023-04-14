@@ -15,19 +15,14 @@ class TrendingBar extends StatelessWidget {
         height: 100,
         child: Column(
           children: [
-            Stack(
-              children: [
-                SizedBox(
-                  height: 100,
-                  width: 70,
-                  child: Image.asset(
-                    bookChildTrendingImage,
-                    fit: BoxFit.fill,
-                  ),
-                )
-              ],
+            SizedBox(
+              height: 100,
+              width: 70,
+              child: Image.asset(
+                bookChildTrendingImage,
+                fit: BoxFit.fill,
+              ),
             ),
-            // thay thành Image.network
             Text(
               bookChildTrendingTitle,
               textAlign: TextAlign.center,
