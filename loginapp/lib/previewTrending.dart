@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'constant.dart';
 
 class PreviewTrending extends StatelessWidget {
   final String trendingImagePreview;
@@ -17,51 +18,68 @@ class PreviewTrending extends StatelessWidget {
     return Dialog(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
       child: SizedBox(
-        height: 500,
-        width: 200,
+        height: 600,
+        width: 500,
         child: Padding(
-          padding: const EdgeInsets.all(8),
-          child: ListView(
-            children: [
-              Column(
-                children: [
-                  Padding(
-                    padding: const EdgeInsetsDirectional.fromSTEB(0, 30, 0, 0),
-                    child: Image.asset(
-                      trendingImagePreview,
-                      alignment: Alignment.topCenter,
+          padding: const EdgeInsets.all(6),
+          child: Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10),
+              color: mainScreenBG,
+            ),
+            child: ListView(
+              children: [
+                Column(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsetsDirectional.fromSTEB(0, 20, 0, 0),
+                      child: Image.asset(
+                        trendingImagePreview,
+                        alignment: Alignment.topCenter,
+                      ),
+                    ), // preview image
+                    Padding(
+                      padding: const EdgeInsetsDirectional.fromSTEB(0, 25, 0, 0),
+                      child: Text(
+                        trendingTitlePreview,
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          fontSize: 30,
+                          fontWeight: FontWeight.w800,
+                          color: mainScreenText,
+                        ),
+                      ),
                     ),
-                  ), // preview image
-                  Padding(
-                    padding: const EdgeInsetsDirectional.fromSTEB(0, 30, 0, 0),
+                  ], // Name
+                ),
+                Padding(
+                  padding: const EdgeInsetsDirectional.fromSTEB(0, 35, 0, 0),
+                  child: Expanded(
+                    // tag/genre
                     child: Text(
-                      trendingTitlePreview,
+                      'Thể loại: $trendingTagPreview',
                       textAlign: TextAlign.center,
+                      style: TextStyle(
+                        color: mainScreenText,
+                      ),
                     ),
                   ),
-                ], // Name
-              ),
-              Padding(
-                padding: const EdgeInsetsDirectional.fromSTEB(0, 30, 0, 0),
-                child: Expanded(
-                  // tag/genre
-                  child: Text(
-                    'Thể loại: $trendingTagPreview',
-                    textAlign: TextAlign.center,
+                ),
+                Padding(
+                  padding: const EdgeInsetsDirectional.fromSTEB(0, 20, 0, 0),
+                  child: Expanded(
+                    // description/summary
+                    child: Text(
+                      trendingDescPreview,
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        color: mainScreenText,
+                      ),
+                    ),
                   ),
                 ),
-              ),
-              Padding(
-                padding: const EdgeInsetsDirectional.fromSTEB(0, 30, 0, 0),
-                child: Expanded(
-                  // description/summary
-                  child: Text(
-                    trendingDescPreview,
-                    textAlign: TextAlign.center,
-                  ),
-                ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),

@@ -1,8 +1,10 @@
 import 'package:loginapp/homepage.dart';
 import 'package:flutter/material.dart';
+import 'package:loginapp/constant.dart';
 
 class SideBar extends StatefulWidget {
-  const SideBar({super.key});
+  final Function() toggleDarkTheme;
+  const SideBar(this.toggleDarkTheme, {super.key});
 
   @override
   SideBarState createState() => SideBarState();
@@ -10,42 +12,88 @@ class SideBar extends StatefulWidget {
 
 class SideBarState extends State<SideBar> {
   @override
-  Widget build(BuildContext context) {
-    return Drawer(
-      child: ListView(
-        children: <Widget>[
-          const UserAccountsDrawerHeader(
-            accountName: null,
-            currentAccountPicture: CircleAvatar(/*backgroundImage: NetworkImage()*/),
-            accountEmail: null,
-            decoration: BoxDecoration(color: Color.fromARGB(255, 0, 255, 132)),
-            /*Lấy data từ google hay gì đó*/
-          ),
-          ListTile(
-            leading: const Icon(
-              Icons.person,
-              size: 50,
-            ),
-            title: const Text('Tài khoản'),
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const HomePage(),
+  Widget build(BuildContext context) => Drawer(
+        child: Container(
+          color: mainScreenBG,
+          child: ListView(
+            children: <Widget>[
+              UserAccountsDrawerHeader(
+                accountName: Text(
+                  'Account Name',
+                  style: TextStyle(
+                    color: mainScreenText,
+                    fontSize: 25,
+                  ),
                 ),
-              );
-            },
+                currentAccountPicture: const CircleAvatar(/*backgroundImage: NetworkImage()*/),
+                accountEmail: Text(
+                  'example@example.com',
+                  style: TextStyle(
+                    color: mainScreenText,
+                  ),
+                ),
+                decoration: BoxDecoration(color: appBarBG),
+                /*Lấy data từ google hay gì đó*/
+              ),
+              ListTile(
+                leading: Icon(
+                  Icons.person,
+                  size: 50,
+                  color: iconColor,
+                ),
+                title: Text(
+                  'Tài khoản',
+                  style: TextStyle(
+                    fontSize: 20,
+                    color: mainScreenText,
+                  ),
+                ),
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const HomePage(),
+                    ),
+                  );
+                },
+              ),
+              ListTile(
+                leading: Icon(
+                  iconTheme,
+                  size: 50,
+                  color: iconColor,
+                ),
+                title: Text(
+                  'Dark Mode',
+                  style: TextStyle(
+                    fontSize: 20,
+                    color: mainScreenText,
+                  ),
+                ),
+                trailing: Icon(
+                  iconThemeToggle,
+                  size: 50,
+                  color: iconColor,
+                ),
+                onTap: widget.toggleDarkTheme,
+              ),
+              ListTile(
+                leading: Icon(
+                  Icons.report,
+                  size: 50,
+                  color: iconColor,
+                ),
+                title: Text(
+                  'Báo lỗi',
+                  style: TextStyle(
+                    fontSize: 20,
+                    color: mainScreenText,
+                  ),
+                ),
+                onTap: () {},
+              ),
+            ],
           ),
-          ListTile(
-            leading: const Icon(
-              Icons.report,
-              size: 50,
-            ),
-            title: const Text('Báo lỗi'),
-            onTap: () {},
-          ),
-        ],
-      ),
-    );
-  }
+        ),
+      );
 }

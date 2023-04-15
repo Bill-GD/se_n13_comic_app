@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:loginapp/constant.dart';
 
 class TrendingBar extends StatelessWidget {
   final String bookChildTrendingTitle;
@@ -26,6 +27,10 @@ class TrendingBar extends StatelessWidget {
             Text(
               bookChildTrendingTitle,
               textAlign: TextAlign.center,
+              style: TextStyle(
+                fontWeight: FontWeight.w700,
+                color: mainScreenText,
+              ),
             )
           ],
         ),

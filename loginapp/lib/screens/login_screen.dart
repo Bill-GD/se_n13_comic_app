@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:loginapp/constant.dart';
+import 'package:loginapp/main_screen/home_screen.dart';
 import 'package:loginapp/provider/email_sign_in.dart';
 import 'package:loginapp/provider/google_sign_in.dart';
 import 'package:loginapp/screens/forgot_password_screen.dart';
@@ -154,15 +155,14 @@ class _LoginScreenState extends State<LoginScreen> {
                     SizedBox(
                       height: 48,
                       child: ElevatedButton.icon(
-                        onPressed: () {
+                        onPressed: () async {
                           final provider =
                               Provider.of<GoogleSignInProvider>(context, listen: false);
-                          provider.googleLogin();
-                          // Navigator.push(
-                          //   context,
-                          //   MaterialPageRoute(
-                          //       builder: (context) => const HomePage()),
-                          // );
+                          await provider.googleLogin();
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => const HomeScreen()),
+                          );
                         },
                         style: ButtonStyle(
                           elevation: const MaterialStatePropertyAll<double>(0),

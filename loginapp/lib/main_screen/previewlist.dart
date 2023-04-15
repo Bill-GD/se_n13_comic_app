@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:loginapp/constant.dart';
 
-class List extends StatelessWidget {
+class PreviewList extends StatelessWidget {
   final String bookChild;
   final String bookChildImage;
-  const List({super.key, required this.bookChild, required this.bookChildImage});
+  const PreviewList({super.key, required this.bookChild, required this.bookChildImage});
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -27,7 +28,11 @@ class List extends StatelessWidget {
                 bookChild,
                 maxLines: 3,
                 overflow: TextOverflow.ellipsis,
-                style: const TextStyle(fontSize: 15),
+                style: TextStyle(
+                  fontSize: 15,
+                  fontWeight: FontWeight.w700,
+                  color: mainScreenText,
+                ),
                 textAlign: TextAlign.center,
               ),
             ),

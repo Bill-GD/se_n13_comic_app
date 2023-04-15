@@ -1,6 +1,6 @@
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:flutter/material.dart';
-import 'package:loginapp/main_screen/list.dart';
+import 'package:loginapp/main_screen/previewlist.dart';
 import 'package:loginapp/main_screen/preview.dart';
 import 'package:loginapp/main_screen/trending.dart';
 import 'package:loginapp/previewTrending.dart';
@@ -105,21 +105,50 @@ class HomeScreenState extends State<HomeScreen> {
     'Học đường, Lãng mạn, Shounen, Drama',
     'Học đường, Lãng mạn, Shounen, Drama',
   ];
+  bool _isDarkTheme = false;
+  void toggleDarkTheme() {
+    setState(() {
+      _isDarkTheme = !_isDarkTheme;
+      appBarBG = _isDarkTheme
+          ? const Color.fromARGB(255, 0, 0, 0)
+          : const Color.fromARGB(255, 0, 255, 132);
+      buttonBG = _isDarkTheme
+          ? const Color.fromARGB(255, 100, 100, 100)
+          : const Color.fromARGB(255, 0, 120, 255);
+      mainScreenBG = _isDarkTheme
+          ? const Color.fromARGB(255, 70, 70, 70)
+          : const Color.fromARGB(255, 255, 255, 255);
+      mainScreenText = _isDarkTheme
+          ? const Color.fromARGB(255, 255, 255, 255)
+          : const Color.fromARGB(255, 0, 0, 0);
+      iconColor = _isDarkTheme
+          ? const Color.fromARGB(255, 255, 255, 255)
+          : const Color.fromARGB(255, 100, 100, 100);
+      iconTheme = _isDarkTheme ? Icons.brightness_3 : Icons.sunny;
+      iconThemeToggle = _isDarkTheme ? Icons.toggle_on : Icons.toggle_off_outlined;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: 69,
-        backgroundColor: const Color.fromARGB(255, 0, 255, 132),
+        backgroundColor: appBarBG,
         leading: Builder(
           builder: (context) {
-            return GestureDetector(
-              onTap: () => Scaffold.of(context).openDrawer(),
-              child: const CircleAvatar(
-                /*Lấy avatar từ tài khoản google người dùng, thay một varible vào*/
-                radius: 10,
-                backgroundImage: NetworkImage(''),
-              ),
+            return Row(
+              children: [
+                const SizedBox(width: 10),
+                GestureDetector(
+                  onTap: () => Scaffold.of(context).openDrawer(),
+                  child: const CircleAvatar(
+                    /*Lấy avatar từ tài khoản google người dùng, thay một varible vào*/
+                    radius: 20,
+                    backgroundImage: NetworkImage(''),
+                  ),
+                ),
+              ],
             );
           },
         ),
@@ -142,125 +171,134 @@ class HomeScreenState extends State<HomeScreen> {
           )
         ],
       ),
-      drawer: const SideBar(),
+
+      // pass toggleDarkTheme as the Function argument to SideBar()
+      drawer: SideBar(
+        toggleDarkTheme,
+      ),
 
       // Main part of Screen
 
-      body: ListView(
-        children: [
-          SizedBox(
-            height: 45,
-            child: Center(
-              child: Container(
-                decoration: const BoxDecoration(
-                  color: Color.fromARGB(159, 179, 179, 179),
-                  borderRadius: BorderRadius.all(Radius.circular(10)),
+      body: Container(
+        color: mainScreenBG,
+        child: ListView(
+          children: [
+            SizedBox(
+              height: 45,
+              child: Center(
+                child: Container(
+                  // decoration: const BoxDecoration(
+                  //   color: Color.fromARGB(159, 179, 179, 179),
+                  //   borderRadius: BorderRadius.all(Radius.circular(10)),
+                  // ),
+                  child: Text(
+                    'Nổi bật',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: 30,
+                      fontWeight: FontWeight.bold,
+                      color: mainScreenText,
+                    ),
+                  ),
                 ),
-                child: const Text(
-                  'Nổi bật',
+              ),
+            ),
+            //thanh nổi bật
+            SizedBox(
+              height: 200,
+              child: ListView.builder(
+                //top 10 nổi bật
+                itemCount: 10,
+                shrinkWrap: true,
+                scrollDirection: Axis.horizontal,
+                itemBuilder: (context, index) {
+                  return GestureDetector(
+                    onTap: () => showDialog(
+                      context: context,
+                      builder: (context) => PreviewTrending(
+                          trendingImagePreview: trendingImage[index],
+                          trendingTitlePreview: trendingTitle[index],
+                          trendingDescPreview: trendingDesc[index],
+                          trendingTagPreview: trendingTag[index]),
+                    ),
+                    child: TrendingBar(
+                      bookChildTrendingTitle: trendingTitle[index],
+                      bookChildTrendingImage: trendingImage[index],
+                    ),
+                  );
+                },
+              ),
+            ),
+
+            // dòng chữ Chương mới nhất
+
+            Center(
+              child: Container(
+                // decoration: const BoxDecoration(
+                //   color: Color.fromARGB(159, 179, 179, 179),
+                //   borderRadius: BorderRadius.all(Radius.circular(10)),
+                // ),
+                child: Text(
+                  'Chương mới nhất',
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 30,
                     fontWeight: FontWeight.bold,
+                    color: mainScreenText,
                   ),
                 ),
               ),
             ),
-          ),
-          //thanh nổi bật
-          SizedBox(
-            height: 200,
-            child: ListView.builder(
-              //top 10 nổi bật
-              itemCount: 10,
+
+            //danh sách truyện
+
+            GridView.builder(
+              physics: const ScrollPhysics(),
+              itemCount: bookTitle.length,
+              gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+                maxCrossAxisExtent: 200,
+                crossAxisSpacing: 20,
+                mainAxisSpacing: 20,
+              ),
+              padding: const EdgeInsets.all(8),
               shrinkWrap: true,
-              scrollDirection: Axis.horizontal,
               itemBuilder: (context, index) {
                 return GestureDetector(
                   onTap: () => showDialog(
                     context: context,
-                    builder: (context) => PreviewTrending(
-                        trendingImagePreview: trendingImage[index],
-                        trendingTitlePreview: trendingTitle[index],
-                        trendingDescPreview: trendingDesc[index],
-                        trendingTagPreview: trendingTag[index]),
+                    builder: (context) => Preview(
+                      bookChild: bookTitle[index],
+                      bookChild2: tag[index],
+                      bookChild3: summary[index],
+                      bookChildImage: image[index],
+                    ),
                   ),
-                  child: TrendingBar(
-                    bookChildTrendingTitle: trendingTitle[index],
-                    bookChildTrendingImage: trendingImage[index],
-                  ),
-                );
+                  child: PreviewList(
+                    bookChild: bookTitle[index],
+                    bookChildImage: image[index],
+                  ), //danh sách
+                ); //danh sách
               },
             ),
-          ),
-
-          // dòng chữ Chương mới nhất
-
-          Center(
-            child: Container(
-              decoration: const BoxDecoration(
-                color: Color.fromARGB(159, 179, 179, 179),
-                borderRadius: BorderRadius.all(Radius.circular(10)),
-              ),
-              child: const Text(
-                'Chương mới nhất',
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: 30,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ),
-          ),
-
-          //danh sách truyện
-
-          GridView.builder(
-            physics: const ScrollPhysics(),
-            itemCount: bookTitle.length,
-            gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-              maxCrossAxisExtent: 200,
-              crossAxisSpacing: 20,
-              mainAxisSpacing: 20,
-            ),
-            padding: const EdgeInsets.all(8),
-            shrinkWrap: true,
-            itemBuilder: (context, index) {
-              return GestureDetector(
-                onTap: () => showDialog(
-                  context: context,
-                  builder: (context) => Preview(
-                    bookChild: bookTitle[index],
-                    bookChild2: tag[index],
-                    bookChild3: summary[index],
-                    bookChildImage: image[index],
-                  ),
-                ),
-                child: List(
-                  bookChild: bookTitle[index],
-                  bookChildImage: image[index],
-                ), //danh sách
-              ); //danh sách
-            },
-          ),
-        ],
+          ],
+        ),
       ),
       bottomNavigationBar: BottomAppBar(
         height: 60,
-        color: const Color.fromARGB(255, 0, 255, 132),
+        color: appBarBG,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             ElevatedButton(
               onPressed: () {},
               style: ButtonStyle(
-                backgroundColor: MaterialStatePropertyAll(lightBlue),
+                backgroundColor: MaterialStatePropertyAll(buttonBG),
               ),
               child: Row(
                 children: const [
                   Icon(
                     FontAwesomeIcons.fire,
-                    color: Color.fromARGB(255, 147, 51, 44),
+                    color: Colors.deepOrange,
                   ),
                   SizedBox(width: 5),
                   Text('Nổi bật'),
@@ -274,7 +312,7 @@ class HomeScreenState extends State<HomeScreen> {
             ElevatedButton(
               onPressed: () {},
               style: ButtonStyle(
-                backgroundColor: MaterialStatePropertyAll(lightBlue),
+                backgroundColor: MaterialStatePropertyAll(buttonBG),
               ),
               child: Row(
                 children: const [
@@ -291,12 +329,12 @@ class HomeScreenState extends State<HomeScreen> {
             ElevatedButton(
               onPressed: () {},
               style: ButtonStyle(
-                backgroundColor: MaterialStatePropertyAll(lightBlue),
+                backgroundColor: MaterialStatePropertyAll(buttonBG),
               ),
               child: Row(
                 children: const [
                   Icon(
-                    FontAwesomeIcons.exclamation,
+                    Icons.error,
                     color: Color(0xFFFF0000),
                   ),
                   SizedBox(width: 5),
