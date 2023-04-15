@@ -12,18 +12,19 @@ class TrendingBar extends StatelessWidget {
   });
   @override
   Widget build(BuildContext context) => SizedBox(
-        width: 80,
+        width: 150,
         height: 100,
         child: Column(
           children: [
             SizedBox(
               height: 100,
-              width: 70,
+              width: 100,
               child: Image.asset(
                 bookChildTrendingImage,
-                fit: BoxFit.fill,
+                fit: BoxFit.contain,
               ),
             ),
+            const SizedBox(height: 5),
             Text(
               bookChildTrendingTitle,
               textAlign: TextAlign.center,

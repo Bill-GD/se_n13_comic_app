@@ -2,15 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:loginapp/constant.dart';
 
 class Preview extends StatelessWidget {
-  final String bookChild;
-  final String bookChild2;
-  final String bookChild3;
+  final String bookChildTitle;
+  final String bookChildTags;
+  final String bookChildDesc;
   final String bookChildImage;
   const Preview(
       {super.key,
-      required this.bookChild,
-      required this.bookChild2,
-      required this.bookChild3,
+      required this.bookChildTitle,
+      required this.bookChildTags,
+      required this.bookChildDesc,
       required this.bookChildImage});
 
   @override
@@ -41,7 +41,7 @@ class Preview extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsetsDirectional.fromSTEB(0, 25, 0, 0),
                       child: Text(
-                        bookChild,
+                        bookChildTitle,
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           fontSize: 30,
@@ -57,7 +57,7 @@ class Preview extends StatelessWidget {
                   child: Expanded(
                     child: // tag/genre
                         Text(
-                      'Thể loại: $bookChild2',
+                      'Thể loại: $bookChildTags',
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         color: mainScreenText,
@@ -70,7 +70,7 @@ class Preview extends StatelessWidget {
                   child: Expanded(
                     child: // summary
                         Text(
-                      bookChild3,
+                      bookChildDesc,
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         color: mainScreenText,

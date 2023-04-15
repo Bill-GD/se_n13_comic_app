@@ -6,6 +6,7 @@ import 'package:loginapp/main_screen/trending.dart';
 import 'package:loginapp/previewTrending.dart';
 import 'package:loginapp/constant.dart';
 import 'package:loginapp/tool/side_bar.dart';
+import 'package:loginapp/data/storedbooks.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -15,96 +16,6 @@ class HomeScreen extends StatefulWidget {
 }
 
 class HomeScreenState extends State<HomeScreen> {
-  final bookTitle = [
-    //Tiêu đề tạm thời. Thêm dữ liệu từ data base
-
-    'Tôi là mèo nên tôi sẽ kêu meomeo',
-    'Tôi là chó nên tôi sẽ kêu gâu gâu',
-    'Tôi là lợn nên tôi sẽ kêu ụt ịt',
-    'Smooth Words',
-    'I honestly find her about as intimidating as a basket of kittens.',
-    'I honestly find her about as intimidating as a basket of kittens.',
-  ];
-  final tag = [
-    //Tag tạm thời. Lấy dữ liệu về
-    'Học đường, Lãng mạn, Shounen, Drama',
-    'Học đường, Lãng mạn, Shounen, Drama',
-    'Học đường, Lãng mạn, Shounen, Drama',
-    'Học đường, Lãng mạn, Shounen, Drama',
-    'Học đường, Lãng mạn, Shounen, Drama',
-    'Học đường, Lãng mạn, Shounen, Drama'
-  ];
-  final summary = [
-    //Giới thiệu/tóm tắt tạm thời. Lấy dữ liệu về
-    'Đây là giới thiệu tác phẩm',
-    'Đây là giới thiệu tác phẩm',
-    'Đây là giới thiệu tác phẩm',
-    'Đây là giới thiệu tác phẩm',
-    'Đây là giới thiệu tác phẩm',
-    'Đây là giới thiệu tác phẩm',
-  ];
-  final image = [
-    //Ảnh bìa tạm thời. Lấy link ảnh vào đây, tạm thời để ảnh có sẵn
-    'assets/cato.png',
-    'assets/noimage.jpg',
-    'assets/noimage.jpg',
-    'assets/noimage.jpg',
-    'assets/noimage.jpg',
-    'assets/noimage.jpg',
-  ];
-  final trendingTitle = [
-    //tiêu đề sách trending
-    'Nhập tên 1 vào đây',
-    'Nhập tên 2 vào đây',
-    'Nhập tên 3 vào đây',
-    'Nhập tên 4 vào đây',
-    'Nhập tên 5 vào đây',
-    'Nhập tên 6 vào đây',
-    'Nhập tên 7 vào đây',
-    'Nhập tên 8 vào đây',
-    'Nhập tên 9 vào đây',
-    'Nhập tên 10 vào đây',
-  ];
-  final trendingImage = [
-    //ảnh sách trending
-    'assets/bunny-rabbit.jpg',
-    'assets/noimage.jpg',
-    'assets/noimage.jpg',
-    'assets/noimage.jpg',
-    'assets/noimage.jpg',
-    'assets/noimage.jpg',
-    'assets/noimage.jpg',
-    'assets/noimage.jpg',
-    'assets/noimage.jpg',
-    'assets/noimage.jpg',
-  ];
-  final trendingDesc = [
-    //Giới thiệu/tóm tắt tạm thời sách trending. Lấy dữ liệu về
-    'Đây là tác phẩm về gì đó',
-    'Đây là tác phẩm về gì đó',
-    'Đây là tác phẩm về gì đó',
-    'Đây là tác phẩm về gì đó',
-    'Đây là tác phẩm về gì đó',
-    'Đây là tác phẩm về gì đó',
-    'Đây là tác phẩm về gì đó',
-    'Đây là tác phẩm về gì đó',
-    'Đây là tác phẩm về gì đó',
-    'Đây là tác phẩm về gì đó',
-  ];
-  final trendingTag = [
-    //tag của sách trending
-    'Học đường, Lãng mạn, Shounen, Drama',
-    'Học đường, Lãng mạn, Shounen, Drama',
-    'Học đường, Lãng mạn, Shounen, Drama',
-    'Học đường, Lãng mạn, Shounen, Drama',
-    'Học đường, Lãng mạn, Shounen, Drama',
-    'Học đường, Lãng mạn, Shounen, Drama',
-    'Học đường, Lãng mạn, Shounen, Drama',
-    'Học đường, Lãng mạn, Shounen, Drama',
-    'Học đường, Lãng mạn, Shounen, Drama',
-    'Học đường, Lãng mạn, Shounen, Drama',
-    'Học đường, Lãng mạn, Shounen, Drama',
-  ];
   bool _isDarkTheme = false;
   void toggleDarkTheme() {
     setState(() {
@@ -112,9 +23,8 @@ class HomeScreenState extends State<HomeScreen> {
       appBarBG = _isDarkTheme
           ? const Color.fromARGB(255, 0, 0, 0)
           : const Color.fromARGB(255, 0, 255, 132);
-      buttonBG = _isDarkTheme
-          ? const Color.fromARGB(255, 100, 100, 100)
-          : const Color.fromARGB(255, 0, 120, 255);
+      buttonBG =
+          _isDarkTheme ? Color.fromARGB(255, 80, 80, 80) : const Color.fromARGB(255, 0, 120, 255);
       mainScreenBG = _isDarkTheme
           ? const Color.fromARGB(255, 70, 70, 70)
           : const Color.fromARGB(255, 255, 255, 255);
@@ -178,26 +88,30 @@ class HomeScreenState extends State<HomeScreen> {
       ),
 
       // Main part of Screen
-
       body: Container(
         color: mainScreenBG,
         child: ListView(
           children: [
             SizedBox(
-              height: 45,
+              height: 80,
               child: Center(
-                child: Container(
-                  // decoration: const BoxDecoration(
-                  //   color: Color.fromARGB(159, 179, 179, 179),
-                  //   borderRadius: BorderRadius.all(Radius.circular(10)),
-                  // ),
-                  child: Text(
-                    'Nổi bật',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontSize: 30,
-                      fontWeight: FontWeight.bold,
-                      color: mainScreenText,
+                child: SizedBox(
+                  height: 50,
+                  width: 400,
+                  child: Container(
+                    alignment: Alignment.center,
+                    decoration: const BoxDecoration(
+                      color: Color.fromARGB(159, 179, 179, 179),
+                      borderRadius: BorderRadius.all(Radius.circular(10)),
+                    ),
+                    child: Text(
+                      'Nổi bật',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontSize: 30,
+                        fontWeight: FontWeight.bold,
+                        color: mainScreenText,
+                      ),
                     ),
                   ),
                 ),
@@ -205,7 +119,7 @@ class HomeScreenState extends State<HomeScreen> {
             ),
             //thanh nổi bật
             SizedBox(
-              height: 200,
+              height: 150,
               child: ListView.builder(
                 //top 10 nổi bật
                 itemCount: 10,
@@ -216,14 +130,14 @@ class HomeScreenState extends State<HomeScreen> {
                     onTap: () => showDialog(
                       context: context,
                       builder: (context) => PreviewTrending(
-                          trendingImagePreview: trendingImage[index],
-                          trendingTitlePreview: trendingTitle[index],
-                          trendingDescPreview: trendingDesc[index],
-                          trendingTagPreview: trendingTag[index]),
+                          trendingImagePreview: trendingEntries[index].cover!,
+                          trendingTitlePreview: trendingEntries[index].title!,
+                          trendingDescPreview: trendingEntries[index].description!,
+                          trendingTagPreview: trendingEntries[index].getTags()!),
                     ),
                     child: TrendingBar(
-                      bookChildTrendingTitle: trendingTitle[index],
-                      bookChildTrendingImage: trendingImage[index],
+                      bookChildTrendingTitle: trendingEntries[index].title!,
+                      bookChildTrendingImage: trendingEntries[index].cover!,
                     ),
                   );
                 },
@@ -231,20 +145,27 @@ class HomeScreenState extends State<HomeScreen> {
             ),
 
             // dòng chữ Chương mới nhất
-
-            Center(
-              child: Container(
-                // decoration: const BoxDecoration(
-                //   color: Color.fromARGB(159, 179, 179, 179),
-                //   borderRadius: BorderRadius.all(Radius.circular(10)),
-                // ),
-                child: Text(
-                  'Chương mới nhất',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontSize: 30,
-                    fontWeight: FontWeight.bold,
-                    color: mainScreenText,
+            SizedBox(
+              height: 80,
+              child: Center(
+                child: SizedBox(
+                  height: 50,
+                  width: 400,
+                  child: Container(
+                    alignment: Alignment.center,
+                    decoration: const BoxDecoration(
+                      color: Color.fromARGB(159, 179, 179, 179),
+                      borderRadius: BorderRadius.all(Radius.circular(10)),
+                    ),
+                    child: Text(
+                      'Chương mới nhất',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontSize: 30,
+                        fontWeight: FontWeight.bold,
+                        color: mainScreenText,
+                      ),
+                    ),
                   ),
                 ),
               ),
@@ -254,7 +175,7 @@ class HomeScreenState extends State<HomeScreen> {
 
             GridView.builder(
               physics: const ScrollPhysics(),
-              itemCount: bookTitle.length,
+              itemCount: entries.length,
               gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
                 maxCrossAxisExtent: 200,
                 crossAxisSpacing: 20,
@@ -267,15 +188,15 @@ class HomeScreenState extends State<HomeScreen> {
                   onTap: () => showDialog(
                     context: context,
                     builder: (context) => Preview(
-                      bookChild: bookTitle[index],
-                      bookChild2: tag[index],
-                      bookChild3: summary[index],
-                      bookChildImage: image[index],
+                      bookChildTitle: entries[index].title!,
+                      bookChildTags: entries[index].getTags()!,
+                      bookChildDesc: entries[index].description!,
+                      bookChildImage: entries[index].cover!,
                     ),
                   ),
                   child: PreviewList(
-                    bookChild: bookTitle[index],
-                    bookChildImage: image[index],
+                    bookChild: entries[index].title!,
+                    bookChildImage: entries[index].cover!,
                   ), //danh sách
                 ); //danh sách
               },

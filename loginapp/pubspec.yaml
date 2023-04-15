@@ -1,10 +1,10 @@
 name: loginapp
 description: A new Flutter project.
-publish_to: 'none'
+publish_to: "none"
 version: 0.1.0
 
 environment:
-  sdk: '>=2.19.2 <3.0.0'
+  sdk: ">=2.19.2 <3.0.0"
 
 dependencies:
   flutter:
@@ -27,3 +27,9 @@ flutter:
     - assets/
     - assets/images/
     - assets/screenshots/
+  fonts:
+    - family: Nunito
+      fonts:
+        # - asset: assets/fonts/Nunito-Regular.ttf
+        - asset: assets/fonts/Nunito-SemiBold.ttf
+        - asset: assets/fonts/Nunito-Bold.ttf
