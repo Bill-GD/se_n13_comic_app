@@ -1,13 +1,12 @@
-
 import 'package:flutter/material.dart';
-class preview extends StatelessWidget{
-  final String bookChild;
-   final String bookChild2;
-  final String bookChild3;
-  final String bookChild_Image;
-  final String author;
- preview({required this.bookChild, required this.bookChild2, required this.bookChild3, required this.bookChild_Image, required this.author});
- 
+class preview_month extends StatelessWidget{
+  final String trending_image_month_pr;
+  final String trending_title_month_pr;
+  final String trending_des_month_pr;
+  final String trending_tag_month_pr;
+  final String author_month_tr;
+  preview_month({required this.trending_image_month_pr, required this.trending_title_month_pr, required this.trending_des_month_pr, required this.trending_tag_month_pr, required this.author_month_tr});
+
 @override
 Widget build(BuildContext context){
  return Dialog(   
@@ -20,31 +19,31 @@ Widget build(BuildContext context){
      children: [
         Column(children:[Padding(
           padding: EdgeInsetsDirectional.fromSTEB(0, 30, 0, 0) ,
-          child: Image.network(bookChild_Image, alignment: Alignment.topCenter,),),
+          child: Image.network(trending_image_month_pr, alignment: Alignment.topCenter,),),
           Padding(
           padding: EdgeInsetsDirectional.fromSTEB(0, 30, 0, 0) ,
-          child: Text(bookChild, textAlign: TextAlign.center),),]//Lấy tên tác phẩm 
+          child: Text(trending_title_month_pr, textAlign: TextAlign.center),),]//Lấy tên tác phẩm 
           ),
           Padding(
           padding: EdgeInsetsDirectional.fromSTEB(0, 30, 0, 0) ,
           child: 
           Expanded(
           child://Thể loại hay gọi là tag
-          Text('Tác giả: '+ author, textAlign: TextAlign.center),)
+          Text('Tác giả: '+ author_month_tr, textAlign: TextAlign.center),)
           ),
           Padding(
           padding: EdgeInsetsDirectional.fromSTEB(0, 30, 0, 0) ,
           child: 
           Expanded(
           child://Thể loại hay gọi là tag
-          Text('Thể loại: '+ bookChild2, textAlign: TextAlign.center),)
+          Text('Thể loại: '+ trending_tag_month_pr, textAlign: TextAlign.center),)
           ),
           Padding(
           padding: EdgeInsetsDirectional.fromSTEB(0, 30, 0, 0) ,
           child: 
           Expanded(
           child://Giới thiệu hay tóm tắt
-          Text(bookChild3, textAlign: TextAlign.center)))
+          Text(trending_des_month_pr, textAlign: TextAlign.center)))
         
     ]
      
