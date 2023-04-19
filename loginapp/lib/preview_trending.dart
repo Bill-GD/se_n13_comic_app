@@ -6,13 +6,15 @@ class PreviewTrending extends StatelessWidget {
   final String trendingTitlePreview;
   final String trendingDescPreview;
   final String trendingTagPreview;
-  const PreviewTrending(
-      {super.key,
-      required this.trendingImagePreview,
-      required this.trendingTitlePreview,
-      required this.trendingDescPreview,
-      required this.trendingTagPreview});
-  @override
+  final String trendingAuthor;
+  const PreviewTrending({
+    super.key,
+    required this.trendingImagePreview,
+    required this.trendingTitlePreview,
+    required this.trendingDescPreview,
+    required this.trendingTagPreview,
+    required this.trendingAuthor,
+  });
   @override
   Widget build(BuildContext context) {
     return Dialog(
@@ -51,6 +53,19 @@ class PreviewTrending extends StatelessWidget {
                       ),
                     ),
                   ], // Name
+                ),
+                Padding(
+                  padding: const EdgeInsetsDirectional.fromSTEB(0, 30, 0, 0),
+                  child: Expanded(
+                    child: Text(
+                      'Tác giả: $trendingAuthor',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontSize: 14,
+                        color: mainScreenText,
+                      ),
+                    ),
+                  ),
                 ),
                 Padding(
                   padding: const EdgeInsetsDirectional.fromSTEB(0, 35, 0, 0),

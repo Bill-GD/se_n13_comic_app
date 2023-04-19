@@ -1,102 +1,191 @@
 import 'book.dart';
 
-final trendingEntries = <Book>[
+var trendingEntries = <Book>[
   Book(
     title: 'Nhập tên 1 vào đây',
     tags: ['Học đường, Lãng mạn, Shounen, Drama'],
     description: 'Đây là tác phẩm về gì đó',
     cover: 'assets/bunny-rabbit.jpg',
+    author: 'author',
   ),
   Book(
     title: 'Nhập tên 1 vào đây',
     tags: ['Học đường, Lãng mạn, Shounen, Drama'],
     description: 'Đây là tác phẩm về gì đó',
     cover: 'assets/noimage.jpg',
+    author: 'author',
   ),
   Book(
     title: 'Nhập tên 1 vào đây',
     tags: ['Học đường, Lãng mạn, Shounen, Drama'],
     description: 'Đây là tác phẩm về gì đó',
     cover: 'assets/noimage.jpg',
+    author: 'author',
   ),
   Book(
     title: 'Nhập tên 1 vào đây',
     tags: ['Học đường, Lãng mạn, Shounen, Drama'],
     description: 'Đây là tác phẩm về gì đó',
     cover: 'assets/noimage.jpg',
+    author: 'author',
   ),
   Book(
     title: 'Nhập tên 1 vào đây',
     tags: ['Học đường, Lãng mạn, Shounen, Drama'],
     description: 'Đây là tác phẩm về gì đó',
     cover: 'assets/noimage.jpg',
+    author: 'author',
   ),
   Book(
     title: 'Nhập tên 1 vào đây',
     tags: ['Học đường, Lãng mạn, Shounen, Drama'],
     description: 'Đây là tác phẩm về gì đó',
     cover: 'assets/noimage.jpg',
+    author: 'author',
   ),
   Book(
     title: 'Nhập tên 1 vào đây',
     tags: ['Học đường, Lãng mạn, Shounen, Drama'],
     description: 'Đây là tác phẩm về gì đó',
     cover: 'assets/noimage.jpg',
+    author: 'author',
   ),
   Book(
     title: 'Nhập tên 1 vào đây',
     tags: ['Học đường, Lãng mạn, Shounen, Drama'],
     description: 'Đây là tác phẩm về gì đó',
     cover: 'assets/noimage.jpg',
+    author: 'author',
   ),
   Book(
     title: 'Nhập tên 1 vào đây',
     tags: ['Học đường, Lãng mạn, Shounen, Drama'],
     description: 'Đây là tác phẩm về gì đó',
     cover: 'assets/noimage.jpg',
+    author: 'author',
   ),
   Book(
     title: 'Nhập tên 1 vào đây',
     tags: ['Học đường, Lãng mạn, Shounen, Drama'],
     description: 'Đây là tác phẩm về gì đó',
     cover: 'assets/noimage.jpg',
+    author: 'author',
   ),
 ];
-final entries = <Book>[
+var entries = <Book>[
   Book(
     title: 'Tôi là mèo nên tôi sẽ kêu meomeo',
     tags: ['Học đường, Lãng mạn, Shounen, Drama'],
     description: 'Đây là giới thiệu tác phẩm',
     cover: 'assets/cato.png',
+    author: 'author',
   ),
   Book(
     title: 'Book 2',
     tags: ['Học đường, Lãng mạn, Shounen, Drama'],
     description: 'Đây là giới thiệu tác phẩm',
     cover: 'assets/noimage.jpg',
+    author: 'author',
   ),
   Book(
     title: 'Book 3',
     tags: ['Học đường, Lãng mạn, Shounen, Drama'],
     description: 'Đây là giới thiệu tác phẩm',
     cover: 'assets/noimage.jpg',
+    author: 'author',
   ),
   Book(
     title: 'Book 4',
     tags: ['Học đường, Lãng mạn, Shounen, Drama'],
     description: 'Đây là giới thiệu tác phẩm',
     cover: 'assets/noimage.jpg',
+    author: 'author',
   ),
   Book(
     title: 'Book 5',
     tags: ['Học đường, Lãng mạn, Shounen, Drama'],
     description: 'Đây là giới thiệu tác phẩm',
     cover: 'assets/noimage.jpg',
+    author: 'author',
   ),
   Book(
     title: 'Book 6',
     tags: ['Học đường, Lãng mạn, Shounen, Drama'],
     description: 'Đây là giới thiệu tác phẩm',
     cover: 'assets/noimage.jpg',
+    author: 'author',
+  ),
+];
+var trendingMonthEntries = <Book>[
+  //thông tin top tháng
+  Book(
+    title: "Tôi là thỏ",
+    tags: ['Học đường', 'Lãng mạn', 'Shounen', 'Drama'],
+    description: "Đây là giới thiệu tác phẩm",
+    cover: "https://iili.io/HvkZyiB.jpg",
+    author: "Abcxyz",
+  ),
+  Book(
+    title: "Tôi là tôi",
+    tags: ['Học đường', 'Lãng mạn', 'Shounen', 'Drama'],
+    description: "Đây là giới thiệu tác phẩm",
+    cover: "https://iili.io/HvkZyiB.jpg",
+    author: "Abcxyz",
+  ),
+  Book(
+    title: "Tôi là tôi",
+    tags: ['Học đường', 'Lãng mạn', 'Shounen', 'Drama'],
+    description: "Đây là giới thiệu tác phẩm",
+    cover: "https://iili.io/HvkZyiB.jpg",
+    author: "Abcxyz",
+  ),
+  Book(
+    title: "Tôi là tôi",
+    tags: ['Học đường', 'Lãng mạn', 'Shounen', 'Drama'],
+    description: "Đây là giới thiệu tác phẩm",
+    cover: "https://iili.io/HvkZyiB.jpg",
+    author: "Abcxyz",
+  ),
+  Book(
+    title: "Tôi là tôi",
+    tags: ['Học đường', 'Lãng mạn', 'Shounen', 'Drama'],
+    description: "Đây là giới thiệu tác phẩm",
+    cover: "https://iili.io/HvkZyiB.jpg",
+    author: "Abcxyz",
+  ),
+  Book(
+    title: "Tôi là tôi",
+    tags: ['Học đường', 'Lãng mạn', 'Shounen', 'Drama'],
+    description: "Đây là giới thiệu tác phẩm",
+    cover: "https://iili.io/HvkZyiB.jpg",
+    author: "Abcxyz",
+  ),
+  Book(
+    title: "Tôi là tôi",
+    tags: ['Học đường', 'Lãng mạn', 'Shounen', 'Drama'],
+    description: "Đây là giới thiệu tác phẩm",
+    cover: "https://iili.io/HvkZyiB.jpg",
+    author: "Abcxyz",
+  ),
+  Book(
+    title: "Tôi là tôi",
+    tags: ['Học đường', 'Lãng mạn', 'Shounen', 'Drama'],
+    description: "Đây là giới thiệu tác phẩm",
+    cover: "https://iili.io/HvkZyiB.jpg",
+    author: "Abcxyz",
+  ),
+  Book(
+    title: "Tôi là tôi",
+    tags: ['Học đường', 'Lãng mạn', 'Shounen', 'Drama'],
+    description: "Đây là giới thiệu tác phẩm",
+    cover: "https://iili.io/HvkZyiB.jpg",
+    author: "Abcxyz",
+  ),
+  Book(
+    title: "Tôi là tôi",
+    tags: ['Học đường', 'Lãng mạn', 'Shounen', 'Drama'],
+    description: "Đây là giới thiệu tác phẩm",
+    cover: "https://iili.io/HvkZyiB.jpg",
+    author: "Abcxyz",
   ),
 ];

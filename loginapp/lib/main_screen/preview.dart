@@ -6,17 +6,22 @@ class Preview extends StatelessWidget {
   final String bookChildTags;
   final String bookChildDesc;
   final String bookChildImage;
-  const Preview(
-      {super.key,
-      required this.bookChildTitle,
-      required this.bookChildTags,
-      required this.bookChildDesc,
-      required this.bookChildImage});
+  final String bookChildAuthor;
+  const Preview({
+    super.key,
+    required this.bookChildTitle,
+    required this.bookChildTags,
+    required this.bookChildDesc,
+    required this.bookChildImage,
+    required this.bookChildAuthor,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Dialog(
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(10),
+      ),
       child: SizedBox(
         height: 600,
         width: 500,
@@ -51,6 +56,18 @@ class Preview extends StatelessWidget {
                       ),
                     ),
                   ], // name
+                ),
+                Padding(
+                  padding: const EdgeInsetsDirectional.fromSTEB(0, 30, 0, 0),
+                  child: Text(
+                    'Tác giả: $bookChildAuthor',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: 30,
+                      fontWeight: FontWeight.w500,
+                      color: mainScreenText,
+                    ),
+                  ),
                 ),
                 Padding(
                   padding: const EdgeInsetsDirectional.fromSTEB(0, 35, 0, 0),
