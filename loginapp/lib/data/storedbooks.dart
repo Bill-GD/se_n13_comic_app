@@ -115,6 +115,34 @@ var entries = <Book>[
     cover: 'assets/noimage.jpg',
     author: 'author',
   ),
+  Book(
+    title: 'Book 7',
+    tags: ['Học đường, Lãng mạn, Shounen, Drama'],
+    description: 'Đây là giới thiệu tác phẩm',
+    cover: 'assets/noimage.jpg',
+    author: 'author',
+  ),
+  Book(
+    title: 'Book 8',
+    tags: ['Học đường, Lãng mạn, Shounen, Drama'],
+    description: 'Đây là giới thiệu tác phẩm',
+    cover: 'assets/noimage.jpg',
+    author: 'author',
+  ),
+  Book(
+    title: 'Book 9',
+    tags: ['Học đường, Lãng mạn, Shounen, Drama'],
+    description: 'Đây là giới thiệu tác phẩm',
+    cover: 'assets/noimage.jpg',
+    author: 'author',
+  ),
+  Book(
+    title: 'Book 10',
+    tags: ['Học đường, Lãng mạn, Shounen, Drama'],
+    description: 'Đây là giới thiệu tác phẩm',
+    cover: 'assets/noimage.jpg',
+    author: 'author',
+  ),
 ];
 var trendingMonthEntries = <Book>[
   //thông tin top tháng

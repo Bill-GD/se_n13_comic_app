@@ -3,12 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:loginapp/constant.dart';
 
 class TrendingBar extends StatelessWidget {
-  final String bookChildTrendingTitle;
-  final String bookChildTrendingImage;
+  final String trendingTitle;
+  final String trendingImage;
   const TrendingBar({
     super.key,
-    required this.bookChildTrendingTitle,
-    required this.bookChildTrendingImage,
+    required this.trendingTitle,
+    required this.trendingImage,
   });
   @override
   Widget build(BuildContext context) => SizedBox(
@@ -20,13 +20,13 @@ class TrendingBar extends StatelessWidget {
               height: 100,
               width: 100,
               child: Image.asset(
-                bookChildTrendingImage,
+                trendingImage,
                 fit: BoxFit.contain,
               ),
             ),
             const SizedBox(height: 5),
             Text(
-              bookChildTrendingTitle,
+              trendingTitle,
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontWeight: FontWeight.w700,

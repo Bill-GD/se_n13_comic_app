@@ -1,104 +1,63 @@
 import 'package:flutter/material.dart';
 import 'package:loginapp/constant.dart';
 
-class Preview extends StatelessWidget {
-  final String bookChildTitle;
-  final String bookChildTags;
-  final String bookChildDesc;
-  final String bookChildImage;
-  final String bookChildAuthor;
-  const Preview({
+class PreviewNew extends StatelessWidget {
+  final String title;
+  final String cover;
+  final String newestChapter;
+  const PreviewNew({
     super.key,
-    required this.bookChildTitle,
-    required this.bookChildTags,
-    required this.bookChildDesc,
-    required this.bookChildImage,
-    required this.bookChildAuthor,
+    required this.title,
+    required this.cover,
+    required this.newestChapter,
   });
-
   @override
   Widget build(BuildContext context) {
-    return Dialog(
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(10),
-      ),
-      child: SizedBox(
-        height: 600,
-        width: 500,
-        child: Padding(
-          padding: const EdgeInsets.all(6),
-          child: Container(
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(8),
-              color: mainScreenBG,
-            ),
-            child: ListView(
-              children: [
-                Column(
+    return Padding(
+      padding: const EdgeInsets.all(2.0),
+      child: Column(
+        children: [
+          Row(
+            children: [
+              SizedBox(
+                height: 150,
+                width: 150,
+                child: Image.asset(
+                  cover,
+                  fit: BoxFit.contain,
+                ),
+              ),
+              Flexible(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Padding(
-                      padding: const EdgeInsetsDirectional.fromSTEB(0, 20, 0, 0),
-                      child: Image.asset(
-                        bookChildImage,
-                        alignment: Alignment.topCenter,
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsetsDirectional.fromSTEB(0, 25, 0, 0),
+                    SizedBox(
                       child: Text(
-                        bookChildTitle,
-                        textAlign: TextAlign.center,
+                        title,
+                        overflow: TextOverflow.ellipsis,
                         style: TextStyle(
-                          fontSize: 30,
-                          fontWeight: FontWeight.w800,
+                          fontSize: 20,
+                          fontWeight: FontWeight.w700,
                           color: mainScreenText,
                         ),
+                        textAlign: TextAlign.start,
                       ),
                     ),
-                  ], // name
-                ),
-                Padding(
-                  padding: const EdgeInsetsDirectional.fromSTEB(0, 30, 0, 0),
-                  child: Text(
-                    'Tác giả: $bookChildAuthor',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontSize: 30,
-                      fontWeight: FontWeight.w500,
-                      color: mainScreenText,
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsetsDirectional.fromSTEB(0, 35, 0, 0),
-                  child: Expanded(
-                    child: // tag/genre
-                        Text(
-                      'Thể loại: $bookChildTags',
-                      textAlign: TextAlign.center,
+                    Text(
+                      newestChapter,
                       style: TextStyle(
+                        fontSize: 15,
+                        fontWeight: FontWeight.bold,
                         color: mainScreenText,
                       ),
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsetsDirectional.fromSTEB(0, 20, 0, 0),
-                  child: Expanded(
-                    child: // summary
-                        Text(
-                      bookChildDesc,
                       textAlign: TextAlign.center,
-                      style: TextStyle(
-                        color: mainScreenText,
-                      ),
                     ),
-                  ),
+                  ],
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
-        ),
+        ],
       ),
     );
   }

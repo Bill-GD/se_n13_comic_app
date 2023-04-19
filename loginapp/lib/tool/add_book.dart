@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:loginapp/constant.dart';
 
 class AddBook extends StatelessWidget {
   const AddBook({super.key});
@@ -8,15 +9,15 @@ class AddBook extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Scaffold(
         appBar: AppBar(
-          title: const Text(
+          title: Text(
             "Đăng tác phẩm",
             style: TextStyle(
               fontSize: 30,
               fontWeight: FontWeight.bold,
-              color: Colors.black,
+              color: mainScreenText,
             ),
           ),
-          backgroundColor: const Color.fromARGB(255, 0, 255, 132),
+          backgroundColor: appBarBG,
         ),
         body: ListView(
           children: [
@@ -26,20 +27,27 @@ class AddBook extends StatelessWidget {
                   alignment: Alignment.centerLeft, //Nhập tên truyện
                   margin: const EdgeInsets.all(10),
                   child: TextField(
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 15,
+                      color: mainScreenText,
+                    ),
                     keyboardType: TextInputType.text,
                     decoration: InputDecoration(
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(15),
                       ),
                       filled: true,
-                      fillColor: const Color.fromARGB(255, 0, 255, 132),
+                      fillColor: appBarBG,
                       hintText: 'Nhập tên truyện',
-                      hintStyle: const TextStyle(
+                      hintStyle: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 15,
+                        color: mainScreenText,
                       ),
-                      prefixIcon: const Icon(
-                        FontAwesomeIcons.book,
+                      prefixIcon: Icon(
+                        FontAwesomeIcons.userPen,
+                        color: iconColor,
                       ),
                     ),
                   ),
@@ -48,20 +56,27 @@ class AddBook extends StatelessWidget {
                   alignment: Alignment.centerLeft, //Nhập tác giả
                   margin: const EdgeInsets.all(10),
                   child: TextField(
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 15,
+                      color: mainScreenText,
+                    ),
                     keyboardType: TextInputType.text,
                     decoration: InputDecoration(
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(15),
                       ),
                       filled: true,
-                      fillColor: const Color.fromARGB(255, 0, 255, 132),
+                      fillColor: appBarBG,
                       hintText: 'Nhập tác giả',
-                      hintStyle: const TextStyle(
+                      hintStyle: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 15,
+                        color: mainScreenText,
                       ),
-                      prefixIcon: const Icon(
+                      prefixIcon: Icon(
                         FontAwesomeIcons.userPen,
+                        color: iconColor,
                       ),
                     ),
                   ),
@@ -71,20 +86,27 @@ class AddBook extends StatelessWidget {
                   margin: const EdgeInsets.all(10),
                   child: TextField(
                     //Nhập tên truyện
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 15,
+                      color: mainScreenText,
+                    ),
                     keyboardType: TextInputType.text,
                     decoration: InputDecoration(
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(15),
                       ),
                       filled: true,
-                      fillColor: const Color.fromARGB(255, 0, 255, 132),
+                      fillColor: appBarBG,
                       hintText: 'Nhập thể loại, cách nhau bằng dấu " , "',
-                      hintStyle: const TextStyle(
+                      hintStyle: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 15,
+                        color: mainScreenText,
                       ),
-                      prefixIcon: const Icon(
-                        FontAwesomeIcons.tag,
+                      prefixIcon: Icon(
+                        FontAwesomeIcons.userPen,
+                        color: iconColor,
                       ),
                     ),
                   ),
@@ -93,20 +115,27 @@ class AddBook extends StatelessWidget {
                   alignment: Alignment.centerLeft, //Nhập url ảnh hiện tại tôi chưa biết cách làm
                   margin: const EdgeInsets.all(10),
                   child: TextField(
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 15,
+                      color: mainScreenText,
+                    ),
                     keyboardType: TextInputType.url,
                     decoration: InputDecoration(
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(15),
                       ),
                       filled: true,
-                      fillColor: const Color.fromARGB(255, 0, 255, 132),
+                      fillColor: appBarBG,
                       hintText: 'Nhập ảnh',
-                      hintStyle: const TextStyle(
+                      hintStyle: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 15,
+                        color: mainScreenText,
                       ),
-                      prefixIcon: const Icon(
-                        FontAwesomeIcons.image,
+                      prefixIcon: Icon(
+                        FontAwesomeIcons.userPen,
+                        color: iconColor,
                       ),
                     ),
                   ),
@@ -116,17 +145,27 @@ class AddBook extends StatelessWidget {
                   margin: const EdgeInsets.all(10),
                   child: TextField(
                     //Nhập tên truyện
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 15,
+                      color: mainScreenText,
+                    ),
                     keyboardType: TextInputType.text,
                     decoration: InputDecoration(
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(15),
                       ),
                       filled: true,
-                      fillColor: const Color.fromARGB(255, 0, 255, 132),
+                      fillColor: appBarBG,
                       hintText: 'Nhập giới thiệu',
-                      hintStyle: const TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
-                      prefixIcon: const Icon(
+                      hintStyle: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 15,
+                        color: mainScreenText,
+                      ),
+                      prefixIcon: Icon(
                         FontAwesomeIcons.userPen,
+                        color: iconColor,
                       ),
                     ),
                   ),
@@ -136,20 +175,27 @@ class AddBook extends StatelessWidget {
                   margin: const EdgeInsets.all(10),
                   child: TextField(
                     //Nhập tên truyện
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 15,
+                      color: mainScreenText,
+                    ),
                     keyboardType: TextInputType.text,
                     decoration: InputDecoration(
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(15),
                       ),
                       filled: true,
-                      fillColor: const Color.fromARGB(255, 0, 255, 132),
+                      fillColor: appBarBG,
                       hintText: 'Nhập nội dung (Tiếu thuyết)',
-                      hintStyle: const TextStyle(
+                      hintStyle: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 15,
+                        color: mainScreenText,
                       ),
-                      prefixIcon: const Icon(
+                      prefixIcon: Icon(
                         FontAwesomeIcons.userPen,
+                        color: iconColor,
                       ),
                     ),
                   ),

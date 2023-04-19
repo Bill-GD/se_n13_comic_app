@@ -1,6 +1,8 @@
 import 'package:loginapp/homepage.dart';
 import 'package:flutter/material.dart';
 import 'package:loginapp/constant.dart';
+import 'package:loginapp/tool/add_book.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class SideBar extends StatefulWidget {
   final Function() toggleDarkTheme;
@@ -17,6 +19,7 @@ class SideBarState extends State<SideBar> {
           color: mainScreenBG,
           child: ListView(
             children: <Widget>[
+              // account header
               UserAccountsDrawerHeader(
                 accountName: Text(
                   'Account Name',
@@ -25,7 +28,11 @@ class SideBarState extends State<SideBar> {
                     fontSize: 25,
                   ),
                 ),
-                currentAccountPicture: const CircleAvatar(/*backgroundImage: NetworkImage()*/),
+                margin: const EdgeInsets.fromLTRB(0, 0, 0, 8),
+                currentAccountPicture: const CircleAvatar(
+                  radius: 10,
+                  //backgroundImage: NetworkImage()
+                ),
                 accountEmail: Text(
                   'example@example.com',
                   style: TextStyle(
@@ -35,6 +42,7 @@ class SideBarState extends State<SideBar> {
                 decoration: BoxDecoration(color: appBarBG),
                 /*Lấy data từ google hay gì đó*/
               ),
+              // account
               ListTile(
                 leading: Icon(
                   Icons.person,
@@ -57,6 +65,46 @@ class SideBarState extends State<SideBar> {
                   );
                 },
               ),
+              // saved books
+              ListTile(
+                leading: Icon(
+                  Icons.library_books,
+                  size: 50,
+                  color: iconColor,
+                ),
+                title: Text(
+                  'Tủ sách',
+                  style: TextStyle(
+                    fontSize: 20,
+                    color: mainScreenText,
+                  ),
+                ),
+                onTap: () {},
+              ),
+              // Add book (admin)
+              ListTile(
+                leading: Icon(
+                  Icons.verified_user,
+                  size: 50,
+                  color: iconColor,
+                ),
+                title: Text(
+                  'Quản trị/Đối tác',
+                  style: TextStyle(
+                    fontSize: 20,
+                    color: mainScreenText,
+                  ),
+                ),
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const AddBook(),
+                    ),
+                  );
+                },
+              ),
+              // Dark mode
               ListTile(
                 leading: Icon(
                   iconTheme,
@@ -77,6 +125,7 @@ class SideBarState extends State<SideBar> {
                 ),
                 onTap: widget.toggleDarkTheme,
               ),
+              // Report error
               ListTile(
                 leading: Icon(
                   Icons.report,
@@ -85,6 +134,22 @@ class SideBarState extends State<SideBar> {
                 ),
                 title: Text(
                   'Báo lỗi',
+                  style: TextStyle(
+                    fontSize: 20,
+                    color: mainScreenText,
+                  ),
+                ),
+                onTap: () {},
+              ),
+              //chăm sóc khách hàng
+              ListTile(
+                leading: Icon(
+                  FontAwesomeIcons.headset,
+                  size: 50,
+                  color: iconColor,
+                ),
+                title: Text(
+                  'Chăm sóc khách hàng',
                   style: TextStyle(
                     fontSize: 20,
                     color: mainScreenText,
