@@ -112,9 +112,10 @@ class PreviewBox extends StatelessWidget {
                         ),
                       ),
                     ),
-                    style: ElevatedButton.styleFrom(
-                      padding: const EdgeInsetsDirectional.fromSTEB(0, 5, 0, 5),
-                      backgroundColor: appBarBG,
+                    style: ButtonStyle(
+                      overlayColor: MaterialStateProperty.resolveWith((states) => appBarBGLight),
+                      padding: MaterialStateProperty.resolveWith((states) => const EdgeInsetsDirectional.fromSTEB(0, 5, 0, 5)),
+                      backgroundColor: MaterialStateProperty.resolveWith((states) => appBarBG),
                     ),
                     child: const Text(
                       'Đọc',

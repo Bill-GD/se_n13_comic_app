@@ -11,5 +11,6 @@ Color appBarBGLight = const Color.fromARGB(255, 165, 255, 212);
 Color mainScreenBG = const Color.fromARGB(255, 255, 255, 255);
 Color mainScreenText = const Color.fromARGB(255, 0, 0, 0);
 Color iconColor = const Color.fromARGB(255, 100, 100, 100);
+Color shadow = const Color.fromARGB(255, 199, 199, 199);
 IconData iconTheme = Icons.sunny;
 IconData iconThemeToggle = Icons.toggle_off_outlined;

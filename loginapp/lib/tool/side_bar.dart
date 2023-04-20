@@ -89,7 +89,7 @@ class SideBarState extends State<SideBar> {
                   color: iconColor,
                 ),
                 title: Text(
-                  'Quản trị/Đối tác',
+                  'Quản trị',
                   style: TextStyle(
                     fontSize: 20,
                     color: mainScreenText,
@@ -134,22 +134,6 @@ class SideBarState extends State<SideBar> {
                 ),
                 title: Text(
                   'Báo lỗi',
-                  style: TextStyle(
-                    fontSize: 20,
-                    color: mainScreenText,
-                  ),
-                ),
-                onTap: () {},
-              ),
-              //chăm sóc khách hàng
-              ListTile(
-                leading: Icon(
-                  FontAwesomeIcons.headset,
-                  size: 50,
-                  color: iconColor,
-                ),
-                title: Text(
-                  'Chăm sóc khách hàng',
                   style: TextStyle(
                     fontSize: 20,
                     color: mainScreenText,

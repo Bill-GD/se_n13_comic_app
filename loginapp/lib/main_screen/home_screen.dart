@@ -39,6 +39,9 @@ class HomeScreenState extends State<HomeScreen> {
       appBarBGLight = _isDarkTheme
           ? const Color.fromARGB(255, 120, 120, 120)
           : const Color.fromARGB(255, 165, 255, 212);
+      shadow = _isDarkTheme
+          ? const Color.fromARGB(255, 130, 130, 130)
+          : const Color.fromARGB(255, 199, 199, 199);
       iconTheme = _isDarkTheme ? Icons.brightness_3 : Icons.sunny;
       iconThemeToggle = _isDarkTheme ? Icons.toggle_on : Icons.toggle_off_outlined;
     });
@@ -175,12 +178,6 @@ class HomeScreenState extends State<HomeScreen> {
                         return Padding(
                           padding: const EdgeInsets.fromLTRB(10, 8, 10, 5),
                           child: ListTile(
-                            // leading: Image.network(
-                            //   entries[index].cover!,
-                            //   fit: BoxFit.fitWidth,
-                            //   width: 40,
-                            //   height: 150,
-                            // ),
                             leading: Image.network(
                               entries[index].cover!,
                               fit: BoxFit.fitWidth,
@@ -371,6 +368,7 @@ class HomeScreenState extends State<HomeScreen> {
                     shrinkWrap: true,
                     itemBuilder: (context, index) {
                       return GestureDetector(
+                        behavior: HitTestBehavior.opaque,
                         onTap: () => showDialog(
                           context: context,
                           builder: (context) => PreviewBox(

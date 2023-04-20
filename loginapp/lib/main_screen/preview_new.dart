@@ -14,14 +14,33 @@ class PreviewNew extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(8),
-      child: Column(
-        children: [
-          Row(
+      padding: const EdgeInsets.fromLTRB(16, 8, 16, 8),
+      child: Container(
+        decoration: BoxDecoration(
+          color: mainScreenBG.withOpacity(1),
+          border: Border.all(
+            color: mainScreenText,
+            width: 2,
+          ),
+          borderRadius: const BorderRadius.all(
+            Radius.circular(5),
+          ),
+          boxShadow: [
+            BoxShadow(
+              color: shadow.withOpacity(0.55),
+              offset: const Offset(5, 3),
+              blurStyle: BlurStyle.outer,
+              spreadRadius: 1,
+            )
+          ],
+        ),
+        child: Padding(
+          padding: const EdgeInsets.all(4.0),
+          child: Row(
             children: [
               SizedBox(
                 height: 150,
-                width: 150,
+                width: 100,
                 child: Image.network(
                   cover,
                   fit: BoxFit.contain,
@@ -32,17 +51,15 @@ class PreviewNew extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    SizedBox(
-                      child: Text(
-                        title,
-                        overflow: TextOverflow.ellipsis,
-                        style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.w700,
-                          color: mainScreenText,
-                        ),
-                        textAlign: TextAlign.start,
+                    Text(
+                      title,
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.w700,
+                        color: mainScreenText,
                       ),
+                      textAlign: TextAlign.start,
                     ),
                     Text(
                       newestChapter,
@@ -58,7 +75,7 @@ class PreviewNew extends StatelessWidget {
               ),
             ],
           ),
-        ],
+        ),
       ),
     );
   }
