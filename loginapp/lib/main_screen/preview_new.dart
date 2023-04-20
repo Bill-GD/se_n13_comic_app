@@ -14,7 +14,7 @@ class PreviewNew extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(2.0),
+      padding: const EdgeInsets.all(8),
       child: Column(
         children: [
           Row(
@@ -22,11 +22,12 @@ class PreviewNew extends StatelessWidget {
               SizedBox(
                 height: 150,
                 width: 150,
-                child: Image.asset(
+                child: Image.network(
                   cover,
                   fit: BoxFit.contain,
                 ),
               ),
+              const SizedBox(width: 10),
               Flexible(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,

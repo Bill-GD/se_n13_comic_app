@@ -1,14 +1,12 @@
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:loginapp/main_screen/book_page.dart';
-import 'package:loginapp/main_screen/preview.dart';
+import 'package:loginapp/main_screen/preview_new.dart';
 import 'package:loginapp/main_screen/preview_box.dart';
-import 'package:loginapp/main_screen/trending.dart';
-import 'package:loginapp/preview_trending.dart';
+import 'package:loginapp/main_screen/trending_bar.dart';
 import 'package:loginapp/constant.dart';
 import 'package:loginapp/tool/side_bar.dart';
 import 'package:loginapp/data/storedbooks.dart';
-import 'package:loginapp/main_screen/preview_month.dart';
 import 'package:loginapp/main_screen/trending_month.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -38,6 +36,9 @@ class HomeScreenState extends State<HomeScreen> {
       iconColor = _isDarkTheme
           ? const Color.fromARGB(255, 255, 255, 255)
           : const Color.fromARGB(255, 100, 100, 100);
+      appBarBGLight = _isDarkTheme
+          ? const Color.fromARGB(255, 120, 120, 120)
+          : const Color.fromARGB(255, 165, 255, 212);
       iconTheme = _isDarkTheme ? Icons.brightness_3 : Icons.sunny;
       iconThemeToggle = _isDarkTheme ? Icons.toggle_on : Icons.toggle_off_outlined;
     });
@@ -70,20 +71,6 @@ class HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    // MaterialStateProperty<Color> GetoverlayColor(Color color, Color colorPressed) {
-    //   final GetoverlayColor = (Set<MaterialState> states) {
-    //     if (states.contains(MaterialState.pressed)) {
-    //       return colorPressed;
-    //     } else {
-    //       return color;
-    //     }
-    //     ;
-    //   };
-    //   return MaterialStateProperty.resolveWith(GetoverlayColor);
-    // }
-    // i don't know wtf is this code
-    // do something about this
-
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: 69,
@@ -181,7 +168,8 @@ class HomeScreenState extends State<HomeScreen> {
                       ),
                     ),
                     ListView.builder(
-                      itemCount: 5,
+                      controller: ScrollController(),
+                      itemCount: entries.length.clamp(0, 5),
                       shrinkWrap: true,
                       itemBuilder: (context, index) {
                         return Padding(
@@ -193,7 +181,7 @@ class HomeScreenState extends State<HomeScreen> {
                             //   width: 40,
                             //   height: 150,
                             // ),
-                            leading: Image.asset(
+                            leading: Image.network(
                               entries[index].cover!,
                               fit: BoxFit.fitWidth,
                               width: 40,
@@ -237,7 +225,7 @@ class HomeScreenState extends State<HomeScreen> {
                         child: Container(
                           alignment: Alignment.center,
                           decoration: const BoxDecoration(
-                            color: Color.fromARGB(159, 179, 179, 179),
+                            color: Color.fromARGB(159, 125, 125, 125),
                             borderRadius: BorderRadius.all(Radius.circular(10)),
                           ),
                           child: Text(
@@ -257,24 +245,25 @@ class HomeScreenState extends State<HomeScreen> {
                     SizedBox(
                       height: 150,
                       child: ListView.builder(
-                        itemCount: 10,
+                        itemCount: trendingEntries.length.clamp(1, 10),
                         shrinkWrap: true,
                         scrollDirection: Axis.horizontal,
                         itemBuilder: (context, index) {
                           return GestureDetector(
                             onTap: () => showDialog(
                               context: context,
-                              builder: (context) => PreviewTrending(
-                                trendingImagePreview: trendingEntries[index].cover!,
-                                trendingTitlePreview: trendingEntries[index].title!,
-                                trendingDescPreview: trendingEntries[index].description!,
-                                trendingTagPreview: trendingEntries[index].getTags()!,
-                                trendingAuthor: trendingEntries[index].author!,
+                              builder: (context) => PreviewBox(
+                                cover: trendingEntries[index].cover!,
+                                title: trendingEntries[index].title!,
+                                description: trendingEntries[index].description!,
+                                tags: trendingEntries[index].getTags()!,
+                                author: trendingEntries[index].author!,
+                                chapterList: trendingEntries[index].chapterList!,
                               ),
                             ),
                             child: TrendingBar(
-                              trendingTitle: trendingEntries[index].title!,
-                              trendingImage: trendingEntries[index].cover!,
+                              title: trendingEntries[index].title!,
+                              cover: trendingEntries[index].cover!,
                             ),
                           );
                         },
@@ -284,7 +273,7 @@ class HomeScreenState extends State<HomeScreen> {
                 ),
               ),
 
-              // tranding month
+              // trending month
               Visibility(
                 visible: showTrendingMonth,
                 child: Column(
@@ -297,7 +286,7 @@ class HomeScreenState extends State<HomeScreen> {
                         child: Container(
                           alignment: Alignment.center,
                           decoration: const BoxDecoration(
-                            color: Color.fromARGB(159, 179, 179, 179),
+                            color: Color.fromARGB(159, 125, 125, 125),
                             borderRadius: BorderRadius.all(Radius.circular(10)),
                           ),
                           child: Text(
@@ -318,22 +307,23 @@ class HomeScreenState extends State<HomeScreen> {
                       height: 150,
                       child: ListView.builder(
                         //top 10 tháng
-                        itemCount: 10,
+                        itemCount: trendingMonthEntries.length.clamp(0, 10),
                         shrinkWrap: true,
                         scrollDirection: Axis.horizontal,
                         itemBuilder: (context, index) {
                           return GestureDetector(
-                            onLongPress: () => showDialog(
+                            onTap: () => showDialog(
                               context: context,
-                              builder: (context) => PreviewMonth(
-                                trendingMonthCover: trendingMonthEntries[index].cover!,
-                                trendingMonthDescription: trendingMonthEntries[index].description!,
-                                trendingMonthTags: trendingMonthEntries[index].getTags()!,
-                                trendingMonthTitle: trendingMonthEntries[index].title!,
-                                trendingMonthAuthor: trendingMonthEntries[index].author!,
+                              builder: (context) => PreviewBox(
+                                cover: trendingMonthEntries[index].cover!,
+                                description: trendingMonthEntries[index].description!,
+                                tags: trendingMonthEntries[index].getTags()!,
+                                title: trendingMonthEntries[index].title!,
+                                author: trendingMonthEntries[index].author!,
+                                chapterList: trendingMonthEntries[index].chapterList!,
                               ),
                             ),
-                            child: TrendingMonth(
+                            child: TrendingBar(
                               cover: trendingMonthEntries[index].cover!,
                               title: trendingMonthEntries[index].title!,
                             ),
@@ -357,7 +347,7 @@ class HomeScreenState extends State<HomeScreen> {
                         child: Container(
                           alignment: Alignment.center,
                           decoration: const BoxDecoration(
-                            color: Color.fromARGB(159, 179, 179, 179),
+                            color: Color.fromARGB(159, 125, 125, 125),
                             borderRadius: BorderRadius.all(Radius.circular(10)),
                           ),
                           child: Text(
@@ -377,7 +367,7 @@ class HomeScreenState extends State<HomeScreen> {
                   ListView.builder(
                     physics: const ScrollPhysics(),
                     itemCount: entries.length,
-                    padding: const EdgeInsets.all(10),
+                    // padding: const EdgeInsets.all(20),
                     shrinkWrap: true,
                     itemBuilder: (context, index) {
                       return GestureDetector(
@@ -422,19 +412,7 @@ class HomeScreenState extends State<HomeScreen> {
               },
               style: ButtonStyle(
                 backgroundColor: MaterialStatePropertyAll(buttonBG),
-                shape: MaterialStateProperty.all(
-                  RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(5),
-                    side: const BorderSide(
-                      width: 1,
-                      color: Colors.black,
-                    ),
-                  ),
-                ),
-                // overlayColor: GetoverlayColor(
-                //   Colors.white,
-                //   Color.fromARGB(217, 181, 212, 163),
-                // ),
+                overlayColor: MaterialStateProperty.resolveWith((states) => buttonBGLight),
               ),
               child: Row(
                 children: const [
@@ -458,19 +436,7 @@ class HomeScreenState extends State<HomeScreen> {
               },
               style: ButtonStyle(
                 backgroundColor: MaterialStatePropertyAll(buttonBG),
-                shape: MaterialStateProperty.all(
-                  RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(5.0),
-                    side: const BorderSide(
-                      width: 1,
-                      color: Colors.black,
-                    ),
-                  ),
-                ),
-                // overlayColor: GetoverlayColor(
-                //   Colors.white,
-                //   Color.fromARGB(217, 181, 212, 163),
-                // ),
+                overlayColor: MaterialStateProperty.resolveWith((states) => buttonBGLight),
               ),
               child: Row(
                 children: const [

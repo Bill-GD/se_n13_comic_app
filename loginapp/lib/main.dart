@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:loginapp/provider/google_sign_in.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:provider/provider.dart';
-import 'package:loginapp/homepage.dart';
 import 'package:flutter/services.dart';
 import 'package:loginapp/main_screen/home.dart';
 
@@ -11,11 +10,9 @@ Future main() async {
   await Firebase.initializeApp();
   runApp(const MyApp());
 
-  // this removes the phone status bar on top
-  // SystemChrome.setEnabledSystemUIMode(
-  //   SystemUiMode.manual,
-  //   overlays: [SystemUiOverlay.bottom],
-  // );
+  SystemChrome.setSystemUIOverlayStyle(
+    const SystemUiOverlayStyle(statusBarColor: Colors.black),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -26,7 +23,7 @@ class MyApp extends StatelessWidget {
         create: (context) => GoogleSignInProvider(),
         child: MaterialApp(
           theme: ThemeData(
-            primarySwatch: Colors.pink,
+            primarySwatch: Colors.blue,
           ),
           debugShowCheckedModeBanner: false,
           home: const Home(),

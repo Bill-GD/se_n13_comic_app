@@ -22,6 +22,7 @@ class PreviewBox extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Dialog(
+      insetPadding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(10),
       ),
@@ -39,7 +40,7 @@ class PreviewBox extends StatelessWidget {
               children: [
                 Column(
                   children: [
-                    Image.asset(
+                    Image.network(
                       cover,
                       alignment: Alignment.topCenter,
                     ),

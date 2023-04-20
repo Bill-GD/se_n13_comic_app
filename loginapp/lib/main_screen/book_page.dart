@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:loginapp/constant.dart';
+import 'package:loginapp/utils/showSnackBar.dart';
 
-class BookPage extends StatelessWidget {
+class BookPage extends StatefulWidget {
   final String cover;
   final String title;
   final String description;
   final String tags;
   final String author;
   final List<String> chapterList;
-  BookPage({
+  const BookPage({
     super.key,
     required this.cover,
     required this.title,
@@ -20,10 +21,17 @@ class BookPage extends StatelessWidget {
   });
 
   @override
+  BookPageState createState() => BookPageState();
+}
+
+class BookPageState extends State<BookPage> {
+  final ScrollController _childScrollController = ScrollController();
+
+  @override
   Widget build(BuildContext context) => Scaffold(
         appBar: AppBar(
           title: Text(
-            title,
+            widget.title,
             style: TextStyle(
               fontSize: 30,
               fontWeight: FontWeight.bold,
@@ -45,8 +53,8 @@ class BookPage extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsetsDirectional.fromSTEB(0, 30, 0, 0),
                       // use network when working with database
-                      child: Image.asset(
-                        cover,
+                      child: Image.network(
+                        widget.cover,
                         alignment: Alignment.topCenter,
                       ),
                     ),
@@ -54,7 +62,7 @@ class BookPage extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsetsDirectional.fromSTEB(0, 30, 0, 0),
                       child: Text(
-                        title,
+                        widget.title,
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           fontSize: 30,
@@ -85,7 +93,7 @@ class BookPage extends StatelessWidget {
                                     ),
                                   ),
                                 ),
-                                TextSpan(text: 'Tác giả: $author'),
+                                TextSpan(text: 'Tác giả: ${widget.author}'),
                               ],
                             ),
                           ),
@@ -114,7 +122,7 @@ class BookPage extends StatelessWidget {
                                     ),
                                   ),
                                 ),
-                                TextSpan(text: ' Thể loại: $tags'),
+                                TextSpan(text: ' Thể loại: ${widget.tags}'),
                               ],
                             ),
                           ),
@@ -127,7 +135,7 @@ class BookPage extends StatelessWidget {
                         padding: const EdgeInsetsDirectional.fromSTEB(0, 30, 0, 20),
                         child: Expanded(
                           child: Text(
-                            description,
+                            widget.description,
                             textAlign: TextAlign.center,
                             style: TextStyle(
                               fontSize: 20,
@@ -148,9 +156,10 @@ class BookPage extends StatelessWidget {
                     child: Center(
                       child: ElevatedButton.icon(
                         onPressed: () {}, // follow function
-                        style: ElevatedButton.styleFrom(
-                          padding: const EdgeInsetsDirectional.fromSTEB(10, 10, 10, 10),
-                          backgroundColor: appBarBG,
+                        style: ButtonStyle(
+                          padding: MaterialStateProperty.resolveWith((states) => const EdgeInsetsDirectional.fromSTEB(10, 10, 10, 10)),
+                          backgroundColor: MaterialStateColor.resolveWith((states) => appBarBG),
+                          overlayColor: MaterialStateColor.resolveWith((states) => appBarBGLight),
                         ),
                         icon: const Icon(
                           FontAwesomeIcons.solidHeart,
@@ -175,6 +184,7 @@ class BookPage extends StatelessWidget {
                   padding: const EdgeInsetsDirectional.fromSTEB(0, 30, 0, 0),
                   child: Container(
                     height: 80,
+                    width: 350,
                     color: appBarBG,
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -198,33 +208,51 @@ class BookPage extends StatelessWidget {
                   ),
                 ),
               ),
-              ListView.builder(
-                shrinkWrap: true,
-                itemCount: chapterList.length,
-                itemBuilder: (context, index) {
-                  return Padding(
-                    padding: const EdgeInsets.fromLTRB(0, 2, 0, 2),
-                    child: SizedBox(
-                      height: 80,
-                      child: ElevatedButton(
-                        onPressed: () {
-                          // read the chapter
-                        },
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: const Color.fromARGB(255, 225, 221, 184),
-                        ),
-                        child: Text(
-                          chapterList[index],
-                          textAlign: TextAlign.center,
-                          style: const TextStyle(
-                            fontSize: 30,
-                            color: Color.fromARGB(255, 0, 0, 0),
+              SizedBox(
+                width: 350,
+                child: Padding(
+                  padding: const EdgeInsets.fromLTRB(21, 0, 21, 0),
+                  child: ListView.builder(
+                    controller: _childScrollController,
+                    shrinkWrap: true,
+                    itemCount: widget.chapterList.length,
+                    itemBuilder: (context, index) {
+                      return Padding(
+                        padding: const EdgeInsets.fromLTRB(0, 1, 0, 1),
+                        child: SizedBox(
+                          height: 80,
+                          child: ElevatedButton(
+                            onPressed: () {
+                              // read the chapter
+                            },
+                            style: ButtonStyle(
+                              backgroundColor: MaterialStatePropertyAll(mainScreenBG),
+                              shape: MaterialStateProperty.all(
+                                RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(5),
+                                  side: const BorderSide(
+                                    width: 3,
+                                    color: Colors.black,
+                                  ),
+                                ),
+                              ),
+                              overlayColor:
+                                  MaterialStateColor.resolveWith((states) => appBarBGLight),
+                            ),
+                            child: Text(
+                              widget.chapterList[widget.chapterList.length - 1 -index],
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                fontSize: 30,
+                                color: mainScreenText,
+                              ),
+                            ),
                           ),
                         ),
-                      ),
-                    ),
-                  );
-                },
+                      );
+                    },
+                  ),
+                ),
               ),
             ],
           ),
