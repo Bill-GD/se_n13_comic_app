@@ -14,23 +14,39 @@ class ChapterList extends StatefulWidget {
 }
 
 class _ChapterListState extends State<ChapterList> {
+  List<String> chapterPage = [];
   List<String> chapterList = [];
+  bool _isLoading = true;
+
   @override
   void initState() {
     super.initState();
     fetchData();
   }
+
   Future<void> fetchData() async {
-    final databaseReference = FirebaseDatabase.instance.ref('chapter');
-    final snapshot = await databaseReference.child(widget.title).child(widget.chapter).once();
-    List<dynamic> chapsJson = snapshot.snapshot.value as List<dynamic>;
-    chapsJson.forEach((value) {
-      chapterList.add(value as String);
-    });
+    if (_isLoading) {
+      final databaseReference = FirebaseDatabase.instance.ref('chapter');
+      final snapshot = await databaseReference.child(widget.title).child(widget.chapter).once();
+      List<dynamic> chapsJson = snapshot.snapshot.value as List<dynamic>;
+      for (var value in chapsJson) {
+        chapterList.add(value as String);
+      }
+      setState(() {
+        chapterPage = chapterList;
+        _isLoading = false;
+      });
+    }
   }
 
   @override
   Widget build(BuildContext context) {
-    return StoryScreen(imageUrls: chapterList, title: widget.title, chapter: widget.chapter);
+    if (_isLoading) {
+      return const Center(
+        child: CircularProgressIndicator(),
+      );
+    } else {
+      return StoryScreen(imageUrls: chapterPage, title: widget.title, chapter: widget.chapter);
+    }
   }
 }

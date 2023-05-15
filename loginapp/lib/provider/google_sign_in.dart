@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:loginapp/provider/email_sign_in.dart';
 
 class GoogleSignInProvider extends ChangeNotifier {
   //Google_sign_in.dart
@@ -35,6 +36,7 @@ class GoogleSignInProvider extends ChangeNotifier {
       FirebaseAuth.instance.signOut();
     } catch (e) {
       print(e.toString());
+      print("Không thể đăng xuất");
     }
   }
 }

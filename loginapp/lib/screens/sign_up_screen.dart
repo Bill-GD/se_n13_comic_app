@@ -20,7 +20,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   void signUpUser() async {
     FirebaseAuthMethods(FirebaseAuth.instance).signUpWithEmail(
-        email: emailController.text, password: passwordController.text, context: context);
+        email: emailController.text, password: passwordController.text, context: context, displayName: nameController.text, photoUrl: 'https://iili.io/HUwb6u4.png');
   }
 
   @override

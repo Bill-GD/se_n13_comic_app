@@ -4,6 +4,9 @@ import 'package:provider/provider.dart';
 import 'package:loginapp/provider/google_sign_in.dart';
 import 'package:loginapp/constant.dart';
 
+import '../homepage.dart';
+import '../provider/email_sign_in.dart';
+
 
 class LoggedInWidget extends StatelessWidget {
   final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
@@ -20,15 +23,18 @@ class LoggedInWidget extends StatelessWidget {
         centerTitle: true,
         actions: [
           TextButton(
-            onPressed: () {
-              final provider =
-                  Provider.of<GoogleSignInProvider>(context, listen: false);
-              provider.logout();
-              // Navigator.push(
-              //   context,
-              //   MaterialPageRoute(builder: (context) => const HomePage()),
-              // );
-            },
+            onPressed: () async {
+              await FirebaseAuthMethods(FirebaseAuth.instance).signOut(context);
+              
+              // final provider =
+              //     Provider.of<GoogleSignInProvider>(context, listen: false);
+              //     provider.logout();
+              // ignore: use_build_context_synchronously
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const HomePage()),
+                );
+              },
             child: const Text(
               'Đăng xuất',
                style: TextStyle(color: Colors.black),
@@ -38,7 +44,7 @@ class LoggedInWidget extends StatelessWidget {
       ),
       body: Container(
         alignment: Alignment.center,
-        color: Color.fromARGB(255, 86, 99, 106),
+        color: const Color.fromARGB(255, 86, 99, 106),
         child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
           const Text(
             'Thông tin cá nhân',
