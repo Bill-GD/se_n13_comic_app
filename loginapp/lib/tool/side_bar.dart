@@ -1,6 +1,9 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:loginapp/homepage.dart';
 import 'package:flutter/material.dart';
 import 'package:loginapp/constant.dart';
+import 'package:loginapp/main_screen/book_case.dart';
+import 'package:loginapp/screens/logged_in_widget.dart';
 import 'package:loginapp/tool/add_book.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -14,7 +17,9 @@ class SideBar extends StatefulWidget {
 
 class SideBarState extends State<SideBar> {
   @override
-  Widget build(BuildContext context) => Drawer(
+  Widget build(BuildContext context) {
+    final user = FirebaseAuth.instance.currentUser!;
+    return Drawer(
         child: Container(
           color: mainScreenBG,
           child: ListView(
@@ -22,19 +27,19 @@ class SideBarState extends State<SideBar> {
               // account header
               UserAccountsDrawerHeader(
                 accountName: Text(
-                  'Account Name',
+                  '${user.displayName}',
                   style: TextStyle(
                     color: mainScreenText,
                     fontSize: 25,
                   ),
                 ),
                 margin: const EdgeInsets.fromLTRB(0, 0, 0, 8),
-                currentAccountPicture: const CircleAvatar(
+                currentAccountPicture: CircleAvatar(
                   radius: 10,
-                  //backgroundImage: NetworkImage()
+                  backgroundImage: NetworkImage(user.photoURL!),
                 ),
                 accountEmail: Text(
-                  'example@example.com',
+                  '${user.email}',
                   style: TextStyle(
                     color: mainScreenText,
                   ),
@@ -60,7 +65,7 @@ class SideBarState extends State<SideBar> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => const HomePage(),
+                      builder: (context) => LoggedInWidget(),
                     ),
                   );
                 },
@@ -79,7 +84,12 @@ class SideBarState extends State<SideBar> {
                     color: mainScreenText,
                   ),
                 ),
-                onTap: () {},
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const BookCaseScreen()),
+                  );
+                },
               ),
               // Add book (admin)
               ListTile(
@@ -145,4 +155,5 @@ class SideBarState extends State<SideBar> {
           ),
         ),
       );
+  }
 }

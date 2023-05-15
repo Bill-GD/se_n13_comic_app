@@ -1,5 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:loginapp/main_screen/home.dart';
+import 'package:loginapp/screens/logged_in_widget.dart';
 import 'screens/login_screen.dart';
 
 class HomePage extends StatelessWidget {
@@ -15,7 +17,7 @@ class HomePage extends StatelessWidget {
                 child: CircularProgressIndicator(),
               );
             } else if (snapshot.hasData) {
-              return const LoginScreen();
+              return  const Home();
             } else if (snapshot.hasError) {
               return const Center(
                 child: Text('Something went wrong'),

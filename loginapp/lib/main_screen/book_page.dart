@@ -1,6 +1,11 @@
+import 'dart:async';
+
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:loginapp/constant.dart';
+import 'package:loginapp/data/storedchapter.dart';
+import 'package:loginapp/main_screen/story_screen.dart';
 import 'package:loginapp/utils/showSnackBar.dart';
 
 class BookPage extends StatefulWidget {
@@ -26,6 +31,21 @@ class BookPage extends StatefulWidget {
 
 class BookPageState extends State<BookPage> {
   final ScrollController _childScrollController = ScrollController();
+
+  late bool isFollowing = false;
+
+  @override
+  void initState() {
+    super.initState();
+    DatabaseReference starCountRef =
+        FirebaseDatabase.instance.ref('books').child(widget.title).child('follow');
+        starCountRef.onValue.listen((DatabaseEvent event) {
+            bool data = event.snapshot.value as bool;
+            setState(() {
+                            isFollowing = data;
+                          }); 
+    });
+  }
 
   @override
   Widget build(BuildContext context) => Scaffold(
@@ -155,18 +175,28 @@ class BookPageState extends State<BookPage> {
                   child: SizedBox(
                     child: Center(
                       child: ElevatedButton.icon(
-                        onPressed: () {}, // follow function
+                        onPressed: () {
+                          // thay đổi trạng thái follow khi click nút
+                          setState(() {
+                            isFollowing = !isFollowing;
+                          });
+                          // cập nhật trạng thái follow lên firebase
+                          final databaseReference = FirebaseDatabase.instance.ref();
+                          databaseReference.child('books').child(widget.title).update({
+                            'follow': isFollowing
+                          });
+                        },// follow function
                         style: ButtonStyle(
                           padding: MaterialStateProperty.resolveWith((states) => const EdgeInsetsDirectional.fromSTEB(10, 10, 10, 10)),
                           backgroundColor: MaterialStateColor.resolveWith((states) => appBarBG),
                           overlayColor: MaterialStateColor.resolveWith((states) => appBarBGLight),
                         ),
-                        icon: const Icon(
+                        icon: Icon(
                           FontAwesomeIcons.solidHeart,
-                          color: Colors.pink,
+                          color: isFollowing ? Colors.red : Colors.grey,
                         ),
                         label: Text(
-                          'Theo dõi',
+                          isFollowing ? 'Đã follow' : 'Follow',
                           textAlign: TextAlign.center,
                           style: TextStyle(
                             fontSize: 30,
@@ -223,8 +253,12 @@ class BookPageState extends State<BookPage> {
                           height: 80,
                           child: ElevatedButton(
                             onPressed: () {
-                              // read the chapter
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (context) => ChapterList(title: widget.title, chapter: widget.chapterList[(widget.chapterList.length - index).abs() - 1])),
+                              );
                             },
+
                             style: ButtonStyle(
                               backgroundColor: MaterialStatePropertyAll(mainScreenBG),
                               shape: MaterialStateProperty.all(

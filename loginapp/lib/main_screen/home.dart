@@ -9,7 +9,7 @@ class Home extends StatelessWidget {
     return MaterialApp(
       theme: ThemeData(fontFamily: 'Nunito'),
       debugShowCheckedModeBanner: false,
-      home: const HomeScreen(),
+      home: HomeScreen(),
     );
   }
 }

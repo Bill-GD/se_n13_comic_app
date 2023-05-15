@@ -2,6 +2,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:loginapp/provider/google_sign_in.dart';
+import 'package:loginapp/constant.dart';
+
 
 class LoggedInWidget extends StatelessWidget {
   final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
@@ -10,10 +12,11 @@ class LoggedInWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final user = FirebaseAuth.instance.currentUser!;
-
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Logged In'),
+        backgroundColor: appBarBG,
+        title: const Text('Tài khoản', style: TextStyle(color: Colors.black),),
+        
         centerTitle: true,
         actions: [
           TextButton(
@@ -27,18 +30,18 @@ class LoggedInWidget extends StatelessWidget {
               // );
             },
             child: const Text(
-              'Logout',
-              style: TextStyle(color: Colors.white),
+              'Đăng xuất',
+               style: TextStyle(color: Colors.black),
             ),
           )
         ],
       ),
       body: Container(
         alignment: Alignment.center,
-        color: Colors.blueGrey.shade900,
+        color: Color.fromARGB(255, 86, 99, 106),
         child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
           const Text(
-            'Profile',
+            'Thông tin cá nhân',
             style: TextStyle(fontSize: 24),
           ),
           const SizedBox(

@@ -1,13 +1,36 @@
+import 'dart:convert';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:loginapp/constant.dart';
+import 'package:http/http.dart' as http;
+import '../data/book.dart';
+
 
 class AddBook extends StatelessWidget {
   const AddBook({super.key});
-
-  //tạm thời
   @override
-  Widget build(BuildContext context) => Scaffold(
+  Widget build(BuildContext context) {
+    Future<void> saveData(Book newBook) async {
+      // ignore: deprecated_member_use
+      DatabaseReference dbRef = FirebaseDatabase.instance.reference();
+      await dbRef.child('books').push().set({
+        'title': newBook.title,
+        'tags': newBook.tags,
+        'description': newBook.description,
+        'cover': newBook.cover,
+        'author': newBook.author,
+        'chapterList': newBook.chapterList,
+        'status': newBook.status,
+        'follow': newBook.follow,
+      });
+    }
+    TextEditingController _txtTentruyen = TextEditingController();
+    TextEditingController _txtTacgia = TextEditingController();
+    TextEditingController _txtTheloai = TextEditingController();
+    TextEditingController _txtNoidung = TextEditingController();
+    TextEditingController _txturlanh = TextEditingController();
+    return Scaffold(
         appBar: AppBar(
           title: Text(
             "Đăng tác phẩm",
@@ -29,6 +52,7 @@ class AddBook extends StatelessWidget {
                     alignment: Alignment.centerLeft, //Nhập tên truyện
                     margin: const EdgeInsets.all(10),
                     child: TextField(
+                      controller: _txtTentruyen,
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 15,
@@ -58,6 +82,7 @@ class AddBook extends StatelessWidget {
                     alignment: Alignment.centerLeft, //Nhập tác giả
                     margin: const EdgeInsets.all(10),
                     child: TextField(
+                      controller: _txtTacgia,
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 15,
@@ -87,7 +112,7 @@ class AddBook extends StatelessWidget {
                     alignment: Alignment.centerLeft, //Nhập thể loại
                     margin: const EdgeInsets.all(10),
                     child: TextField(
-                      //Nhập tên truyện
+                      controller: _txtTheloai,
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 15,
@@ -117,6 +142,7 @@ class AddBook extends StatelessWidget {
                     alignment: Alignment.centerLeft, //Nhập url ảnh hiện tại tôi chưa biết cách làm
                     margin: const EdgeInsets.all(10),
                     child: TextField(
+                      controller: _txturlanh,
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 15,
@@ -146,7 +172,7 @@ class AddBook extends StatelessWidget {
                     alignment: Alignment.centerLeft, //Nhập giới thiệu
                     margin: const EdgeInsets.all(10),
                     child: TextField(
-                      //Nhập tên truyện
+                      controller: _txtNoidung,
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 15,
@@ -202,10 +228,19 @@ class AddBook extends StatelessWidget {
                       ),
                     ),
                   ),
-                ],
+                  ElevatedButton(
+                    onPressed: () async {
+                        List<String> tagsList = _txtTheloai.text.split(", ");
+                        Book newBook = Book(title: _txtTentruyen.text, tags: tagsList, description: _txtNoidung.text, cover: _txturlanh.text, author: _txtTacgia.text, chapterList: ["Chương1", "Chương 2", "Chương 3"], status: 0, follow: false);
+                        saveData(newBook);                                    
+                    },
+                    child: const Text('Đăng truyện mới'),
+                  ),
+                ],   
               ),
             ],
           ),
         ),
       );
+  }
 }

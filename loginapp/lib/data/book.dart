@@ -1,4 +1,3 @@
-// when getting the data from the database, map data using the class
 
 class Book {
   String? title;
@@ -7,6 +6,8 @@ class Book {
   String? cover;
   String? author;
   List<String>? chapterList = [];
+  bool? follow = false;
+  int? status = 0; // 0, 1, 2 => entries, 1 => top_trending, 2 => moth_trending
 
   Book({
     required this.title,
@@ -15,15 +16,18 @@ class Book {
     required this.cover,
     required this.author,
     this.chapterList,
-  }) {
-    chapterList = [
-      'Chương 1',
-      'Chương 2',
-      'Chương 3',
-      'Chương 4',
-      'Chương 5',
-    ];
-  }
+    this.follow,
+    this.status
+  });
+
+  Map<String, dynamic> toJson() => {
+        'title': title,
+        'tags': tags,
+        'description': description,
+        'cover': cover,
+        'author': author,
+        'chapterList': chapterList,
+      };
 
   String? getTags() => tags?.join(", ");
 }

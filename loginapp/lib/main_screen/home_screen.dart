@@ -1,5 +1,9 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_database/firebase_database.dart';
+import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:flutter/material.dart';
+import 'package:loginapp/data/storedchapter.dart';
 import 'package:loginapp/main_screen/book_page.dart';
 import 'package:loginapp/main_screen/preview_new.dart';
 import 'package:loginapp/main_screen/preview_box.dart';
@@ -7,17 +11,21 @@ import 'package:loginapp/main_screen/trending_bar.dart';
 import 'package:loginapp/constant.dart';
 import 'package:loginapp/tool/side_bar.dart';
 import 'package:loginapp/data/storedbooks.dart';
-import 'package:loginapp/main_screen/trending_month.dart';
+import '../data/book.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
-
   @override
   HomeScreenState createState() => HomeScreenState();
 }
 
 class HomeScreenState extends State<HomeScreen> {
+  final ref = FirebaseDatabase.instance.ref('books');
   bool _isDarkTheme = false;
+  List<Book> trendingMonthEntries = [];
+  List<Book> trendingEntries = [];
+  List<Book> entries = [];
+  List<Book> save_entries = [];
   void toggleDarkTheme() {
     setState(() {
       _isDarkTheme = !_isDarkTheme;
@@ -46,22 +54,33 @@ class HomeScreenState extends State<HomeScreen> {
       iconThemeToggle = _isDarkTheme ? Icons.toggle_on : Icons.toggle_off_outlined;
     });
   }
-
   bool showSearch = false;
   bool typing = false;
   bool showTrendingBar = false;
   bool showTrendingMonth = false;
-
-  void searchBook(String query) {
-    final hint = entries.where((book) {
-      final title = book.title!;
-      final input = query.toLowerCase();
-      return title.contains(input);
-    }).toList();
-    setState(() {
-      entries = hint;
+  @override
+  void initState() {
+    super.initState();
+    getBooks().then((bookList) {
+      setState(() {
+        entries = bookList;
+        save_entries = bookList;
+        trendingEntries = top_entriesList;
+        trendingMonthEntries = month_entriesList;
+      });
     });
   }
+  
+ void searchBook(String query) {
+   setState(() {
+    if (query.isEmpty) {
+      entries = List.from(save_entries); // Khôi phục dữ liệu ban đầu nếu người dùng không nhập gì
+      return;
+    }
+    entries = save_entries.where((book) =>
+        book.title?.toLowerCase().contains(query.toLowerCase()) ?? false).toList();
+  });
+}
 
   final ScrollController _scrollController = ScrollController();
   void _scrollUp() {
@@ -71,9 +90,9 @@ class HomeScreenState extends State<HomeScreen> {
       curve: Curves.decelerate,
     );
   }
-
   @override
   Widget build(BuildContext context) {
+    final user = FirebaseAuth.instance.currentUser!;   
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: 69,
@@ -85,10 +104,10 @@ class HomeScreenState extends State<HomeScreen> {
                 const SizedBox(width: 10),
                 GestureDetector(
                   onTap: () => Scaffold.of(context).openDrawer(),
-                  child: const CircleAvatar(
+                  child: CircleAvatar(
                     /*Lấy avatar từ tài khoản google người dùng, thay một varible vào*/
                     radius: 20,
-                    backgroundImage: NetworkImage(''),
+                    backgroundImage: NetworkImage(user.photoURL!),
                   ),
                 ),
               ],
@@ -203,7 +222,7 @@ class HomeScreenState extends State<HomeScreen> {
                           ),
                         );
                       },
-                    ),
+                    ),    
                     const SizedBox(height: 20),
                   ],
                 ),
@@ -371,7 +390,7 @@ class HomeScreenState extends State<HomeScreen> {
                         behavior: HitTestBehavior.opaque,
                         onTap: () => showDialog(
                           context: context,
-                          builder: (context) => PreviewBox(
+                          builder: (context) => PreviewBox( 
                             title: entries[index].title!,
                             tags: entries[index].getTags()!,
                             description: entries[index].description!,
@@ -394,6 +413,7 @@ class HomeScreenState extends State<HomeScreen> {
           ),
         ),
       ),
+      resizeToAvoidBottomInset: false,
       bottomNavigationBar: BottomAppBar(
         height: 60,
         color: appBarBG,
