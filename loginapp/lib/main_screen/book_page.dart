@@ -96,26 +96,24 @@ class BookPageState extends State<BookPage> {
                       alignment: Alignment.centerLeft,
                       child: Padding(
                         padding: const EdgeInsetsDirectional.fromSTEB(0, 30, 0, 0),
-                        child: Expanded(
-                          child: RichText(
-                            text: TextSpan(
-                              style: TextStyle(
-                                fontSize: 20,
-                                color: mainScreenText,
-                              ),
-                              children: [
-                                const WidgetSpan(
-                                  child: Padding(
-                                    padding: EdgeInsets.fromLTRB(2, 0, 10, 0),
-                                    child: Icon(
-                                      FontAwesomeIcons.userPen,
-                                      color: Colors.amberAccent,
-                                    ),
+                        child: RichText(
+                          text: TextSpan(
+                            style: TextStyle(
+                              fontSize: 20,
+                              color: mainScreenText,
+                            ),
+                            children: [
+                              const WidgetSpan(
+                                child: Padding(
+                                  padding: EdgeInsets.fromLTRB(2, 0, 10, 0),
+                                  child: Icon(
+                                    FontAwesomeIcons.userPen,
+                                    color: Colors.amberAccent,
                                   ),
                                 ),
-                                TextSpan(text: 'Tác giả: ${widget.author}'),
-                              ],
-                            ),
+                              ),
+                              TextSpan(text: 'Tác giả: ${widget.author}'),
+                            ],
                           ),
                         ),
                       ),
@@ -125,26 +123,24 @@ class BookPageState extends State<BookPage> {
                       alignment: Alignment.centerLeft,
                       child: Padding(
                         padding: const EdgeInsetsDirectional.fromSTEB(0, 30, 0, 0),
-                        child: Expanded(
-                          child: RichText(
-                            text: TextSpan(
-                              style: TextStyle(
-                                fontSize: 20,
-                                color: mainScreenText,
-                              ),
-                              children: [
-                                const WidgetSpan(
-                                  child: Padding(
-                                    padding: EdgeInsets.fromLTRB(0, 0, 10, 0),
-                                    child: Icon(
-                                      FontAwesomeIcons.tag,
-                                      color: Colors.amberAccent,
-                                    ),
+                        child: RichText(
+                          text: TextSpan(
+                            style: TextStyle(
+                              fontSize: 20,
+                              color: mainScreenText,
+                            ),
+                            children: [
+                              const WidgetSpan(
+                                child: Padding(
+                                  padding: EdgeInsets.fromLTRB(0, 0, 10, 0),
+                                  child: Icon(
+                                    FontAwesomeIcons.tag,
+                                    color: Colors.amberAccent,
                                   ),
                                 ),
-                                TextSpan(text: ' Thể loại: ${widget.tags}'),
-                              ],
-                            ),
+                              ),
+                              TextSpan(text: ' Thể loại: ${widget.tags}'),
+                            ],
                           ),
                         ),
                       ),
@@ -153,14 +149,12 @@ class BookPageState extends State<BookPage> {
                     Center(
                       child: Padding(
                         padding: const EdgeInsetsDirectional.fromSTEB(0, 30, 0, 20),
-                        child: Expanded(
-                          child: Text(
-                            widget.description,
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                              fontSize: 20,
-                              color: mainScreenText,
-                            ),
+                        child: Text(
+                          widget.description,
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontSize: 20,
+                            color: mainScreenText,
                           ),
                         ),
                       ),

@@ -29,107 +29,114 @@ class PreviewBox extends StatelessWidget {
       child: SizedBox(
         height: 650,
         width: 500,
-        child: Padding(
-          padding: const EdgeInsets.all(6),
-          child: Container(
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(8),
-              color: mainScreenBG,
-            ),
-            child: ListView(
-              children: [
-                Column(
-                  children: [
-                    Image.network(
-                      cover,
-                      alignment: Alignment.topCenter,
+        child: Column(
+          children: [
+            Expanded(
+              child: SingleChildScrollView(
+                child: Padding(
+                  padding: const EdgeInsets.all(6),
+                  child: Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(8),
+                      color: mainScreenBG,
                     ),
-                    Padding(
-                      padding: const EdgeInsetsDirectional.fromSTEB(0, 25, 0, 0),
-                      child: Text(
-                        title,
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          fontSize: 30,
-                          fontWeight: FontWeight.w800,
-                          color: mainScreenText,
+                    child: Column(
+                      children: [
+                        Image.network(
+                          cover,
+                          alignment: Alignment.topCenter,
+                          fit: BoxFit.contain,
                         ),
-                      ),
-                    ),
-                  ], // name
-                ),
-                Padding(
-                  padding: const EdgeInsetsDirectional.fromSTEB(0, 30, 0, 0),
-                  child: Text(
-                    'Tác giả: $author',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontSize: 30,
-                      fontWeight: FontWeight.w500,
-                      color: mainScreenText,
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsetsDirectional.fromSTEB(0, 35, 0, 0),
-                  child: Expanded(
-                    child: // tag/genre
-                        Text(
-                      'Thể loại: $tags',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        color: mainScreenText,
-                      ),
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsetsDirectional.fromSTEB(0, 20, 0, 0),
-                  child: Expanded(
-                    child: // summary
-                        Text(
-                      description,
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        color: mainScreenText,
-                      ),
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(90, 20, 90, 20),
-                  child: ElevatedButton(
-                    onPressed: () => Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => BookPage(
-                          cover: cover,
-                          title: title,
-                          author: author,
-                          tags: tags,
-                          description: description,
-                          chapterList: chapterList,
+                        Padding(
+                          padding: const EdgeInsetsDirectional.fromSTEB(0, 15, 0, 0),
+                          child: Text(
+                            title,
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              fontSize: 30,
+                              fontWeight: FontWeight.w800,
+                              color: mainScreenText,
+                            ),
+                          ),
                         ),
-                      ),
-                    ),
-                    style: ButtonStyle(
-                      overlayColor: MaterialStateProperty.resolveWith((states) => appBarBGLight),
-                      padding: MaterialStateProperty.resolveWith((states) => const EdgeInsetsDirectional.fromSTEB(0, 5, 0, 5)),
-                      backgroundColor: MaterialStateProperty.resolveWith((states) => appBarBG),
-                    ),
-                    child: const Text(
-                      'Đọc',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 30,
-                        fontWeight: FontWeight.bold,
-                      ),
+                        Padding(
+                          padding: const EdgeInsetsDirectional.fromSTEB(0, 15, 0, 0),
+                          child: Text(
+                            'Tác giả: $author',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              fontSize: 30,
+                              fontWeight: FontWeight.w500,
+                              color: mainScreenText,
+                            ),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsetsDirectional.fromSTEB(0, 15, 0, 0),
+                          child: Text(
+                            'Thể loại: $tags',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              color: mainScreenText,
+                            ),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsetsDirectional.fromSTEB(0, 15, 0, 0),
+                          child: Text(
+                            description,
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              color: mainScreenText,
+                            ),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.fromLTRB(90, 20, 90, 20),
+                          child: ElevatedButton(
+                            onPressed: () => Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => BookPage(
+                                  cover: cover,
+                                  title: title,
+                                  author: author,
+                                  tags: tags,
+                                  description: description,
+                                  chapterList: chapterList,
+                                ),
+                              ),
+                            ),
+                            style: ButtonStyle(
+                              overlayColor:
+                                  MaterialStateProperty.resolveWith((states) => appBarBGLight),
+                              padding: MaterialStateProperty.resolveWith(
+                                  (states) => const EdgeInsetsDirectional.fromSTEB(0, 5, 0, 5)),
+                              backgroundColor:
+                                  MaterialStateProperty.resolveWith((states) => appBarBG),
+                            ),
+                            child: const SizedBox(
+                              width: 100,
+                              child: Center(
+                                child: Text(
+                                  'Đọc',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 30,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                 ),
-              ],
+              ),
             ),
-          ),
+          ],
         ),
       ),
     );
