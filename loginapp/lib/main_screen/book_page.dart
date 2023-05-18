@@ -1,12 +1,12 @@
-import 'dart:async';
+// import 'dart:async'; // unused import
 
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:loginapp/constant.dart';
 import 'package:loginapp/data/storedchapter.dart';
-import 'package:loginapp/main_screen/story_screen.dart';
-import 'package:loginapp/utils/showSnackBar.dart';
+// import 'package:loginapp/main_screen/story_screen.dart'; // unused import
+// import 'package:loginapp/utils/showSnackBar.dart'; // unused import
 
 class BookPage extends StatefulWidget {
   final String cover;
@@ -39,11 +39,11 @@ class BookPageState extends State<BookPage> {
     super.initState();
     DatabaseReference starCountRef =
         FirebaseDatabase.instance.ref('books').child(widget.title).child('follow');
-        starCountRef.onValue.listen((DatabaseEvent event) {
-            bool data = event.snapshot.value as bool;
-            setState(() {
-                            isFollowing = data;
-                          }); 
+    starCountRef.onValue.listen((DatabaseEvent event) {
+      bool data = event.snapshot.value as bool;
+      setState(() {
+        isFollowing = data;
+      });
     });
   }
 
@@ -182,12 +182,14 @@ class BookPageState extends State<BookPage> {
                           });
                           // cập nhật trạng thái follow lên firebase
                           final databaseReference = FirebaseDatabase.instance.ref();
-                          databaseReference.child('books').child(widget.title).update({
-                            'follow': isFollowing
-                          });
-                        },// follow function
+                          databaseReference
+                              .child('books')
+                              .child(widget.title)
+                              .update({'follow': isFollowing});
+                        }, // follow function
                         style: ButtonStyle(
-                          padding: MaterialStateProperty.resolveWith((states) => const EdgeInsetsDirectional.fromSTEB(10, 10, 10, 10)),
+                          padding: MaterialStateProperty.resolveWith(
+                              (states) => const EdgeInsetsDirectional.fromSTEB(10, 10, 10, 10)),
                           backgroundColor: MaterialStateColor.resolveWith((states) => appBarBG),
                           overlayColor: MaterialStateColor.resolveWith((states) => appBarBGLight),
                         ),
@@ -255,10 +257,17 @@ class BookPageState extends State<BookPage> {
                             onPressed: () {
                               Navigator.push(
                                 context,
-                                MaterialPageRoute(builder: (context) => ChapterList(title: widget.title, chapter: widget.chapterList[(widget.chapterList.length - index).abs() - 1])),
+                                MaterialPageRoute(
+                                  builder: (context) => ChapterList(
+                                    index: index,
+                                    title: widget.title,
+                                    chapter:
+                                        widget.chapterList[widget.chapterList.length - 1 - index],
+                                    chapterList: widget.chapterList,
+                                  ),
+                                ),
                               );
                             },
-
                             style: ButtonStyle(
                               backgroundColor: MaterialStatePropertyAll(mainScreenBG),
                               shape: MaterialStateProperty.all(
@@ -274,7 +283,7 @@ class BookPageState extends State<BookPage> {
                                   MaterialStateColor.resolveWith((states) => appBarBGLight),
                             ),
                             child: Text(
-                              widget.chapterList[widget.chapterList.length - 1 -index],
+                              widget.chapterList[widget.chapterList.length - 1 - index],
                               textAlign: TextAlign.center,
                               style: TextStyle(
                                 fontSize: 30,

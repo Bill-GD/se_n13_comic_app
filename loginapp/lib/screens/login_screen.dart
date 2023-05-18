@@ -161,7 +161,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           await provider.googleLogin();
                           Navigator.push(
                             context,
-                            MaterialPageRoute(builder: (context) => HomeScreen()),
+                            MaterialPageRoute(builder: (context) => const HomeScreen()),
                           );
                         },
                         style: ButtonStyle(

@@ -1,9 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
-import 'package:firebase_database/ui/firebase_animated_list.dart';
+// import 'package:firebase_database/ui/firebase_animated_list.dart'; // unused import
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:flutter/material.dart';
-import 'package:loginapp/data/storedchapter.dart';
+// import 'package:loginapp/data/storedchapter.dart'; // unused import
 import 'package:loginapp/main_screen/book_page.dart';
 import 'package:loginapp/main_screen/preview_new.dart';
 import 'package:loginapp/main_screen/preview_box.dart';

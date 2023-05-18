@@ -1,6 +1,6 @@
 import 'package:firebase_database/firebase_database.dart';
 import 'book.dart';
-import 'package:firebase_core/firebase_core.dart';
+// import 'package:firebase_core/firebase_core.dart'; // unused import
 
 final ref = FirebaseDatabase.instance.ref('books');
 final top_entriesList = <Book>[];

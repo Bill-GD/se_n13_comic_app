@@ -1,13 +1,17 @@
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
+// import 'package:http/http.dart' as http; // unused import
+// import 'dart:convert'; // unused import
 import '../main_screen/story_screen.dart';
+
 // lấy dữ liệu từ api chapter
 class ChapterList extends StatefulWidget {
+  final int index;
   final String title;
   final String chapter;
-  ChapterList({required this.title, required this.chapter});
+  final List<String> chapterList;
+  const ChapterList(
+      {super.key, required this.index, required this.title, required this.chapter, required this.chapterList});
 
   @override
   _ChapterListState createState() => _ChapterListState();
@@ -46,7 +50,13 @@ class _ChapterListState extends State<ChapterList> {
         child: CircularProgressIndicator(),
       );
     } else {
-      return StoryScreen(imageUrls: chapterPage, title: widget.title, chapter: widget.chapter);
+      return StoryScreen(
+        index: widget.index,
+        imageUrls: chapterPage,
+        title: widget.title,
+        chapter: widget.chapter,
+        chapterList: widget.chapterList,
+      );
     }
   }
 }

@@ -1,12 +1,9 @@
-
-
-
 import 'package:firebase_database/firebase_database.dart';
-import 'package:flutter/cupertino.dart';
+// import 'package:flutter/cupertino.dart'; // unnecessary import
 import 'package:flutter/material.dart';
 import 'package:loginapp/main_screen/preview_box.dart';
 import 'package:loginapp/main_screen/preview_case.dart';
-import 'package:loginapp/main_screen/preview_new.dart';
+// import 'package:loginapp/main_screen/preview_new.dart'; // unused import
 
 import '../constant.dart';
 import '../data/book.dart';

@@ -1,11 +1,11 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:loginapp/homepage.dart';
+// import 'package:loginapp/homepage.dart'; // unused import
 import 'package:flutter/material.dart';
 import 'package:loginapp/constant.dart';
 import 'package:loginapp/main_screen/book_case.dart';
 import 'package:loginapp/screens/logged_in_widget.dart';
 import 'package:loginapp/tool/add_book.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+// import 'package:font_awesome_flutter/font_awesome_flutter.dart'; // unused import
 
 class SideBar extends StatefulWidget {
   final Function() toggleDarkTheme;
