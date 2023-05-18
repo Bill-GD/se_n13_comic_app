@@ -56,7 +56,7 @@ class _StoryScreenState extends State<StoryScreen> {
               // hiện tiêu đề chapter
               children: [
                 Text(
-                  "${widget.title}",
+                  widget.title,
                   style: TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
@@ -64,7 +64,7 @@ class _StoryScreenState extends State<StoryScreen> {
                   ),
                 ),
                 Text(
-                  "${widget.chapter}",
+                  widget.chapter,
                   style: TextStyle(
                     fontSize: 15,
                     color: mainScreenText,
@@ -84,7 +84,7 @@ class _StoryScreenState extends State<StoryScreen> {
           prefetchNextImage(index);
           return Image.network(
             widget.imageUrls[index],
-            fit: BoxFit.fitHeight,
+            fit: BoxFit.contain,
           );
         },
         onPageChanged: (int index) {
