@@ -158,10 +158,36 @@ class _LoginScreenState extends State<LoginScreen> {
                         onPressed: () async {
                           final provider =
                               Provider.of<GoogleSignInProvider>(context, listen: false);
-                          await provider.googleLogin();
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (context) => const HomeScreen()),
+                          // await provider.googleLogin();
+                          // Navigator.push(
+                          //   context,
+                          //   MaterialPageRoute(builder: (context) => const HomeScreen()),
+                          // );
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) => FutureBuilder(
+                                future: provider.googleLogin(),
+                                builder: (context, snapshot) {
+                                  if (snapshot.connectionState == ConnectionState.done) {
+                                    if (snapshot.hasError) {
+                                      return Scaffold(
+                                        body: Center(
+                                          child: Text('Error: ${snapshot.error}'),
+                                        ),
+                                      );
+                                    } else {
+                                      return const HomeScreen();
+                                    }
+                                  } else {
+                                    return const Scaffold(
+                                      body: Center(
+                                        child: CircularProgressIndicator(),
+                                      ),
+                                    );
+                                  }
+                                },
+                              ),
+                            ),
                           );
                         },
                         style: ButtonStyle(

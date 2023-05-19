@@ -25,7 +25,7 @@ class HomeScreenState extends State<HomeScreen> {
   List<Book> trendingMonthEntries = [];
   List<Book> trendingEntries = [];
   List<Book> entries = [];
-  List<Book> save_entries = [];
+  List<Book> saveEntries = [];
   void toggleDarkTheme() {
     setState(() {
       _isDarkTheme = !_isDarkTheme;
@@ -54,6 +54,7 @@ class HomeScreenState extends State<HomeScreen> {
       iconThemeToggle = _isDarkTheme ? Icons.toggle_on : Icons.toggle_off_outlined;
     });
   }
+
   bool showSearch = false;
   bool typing = false;
   bool showTrendingBar = false;
@@ -64,23 +65,24 @@ class HomeScreenState extends State<HomeScreen> {
     getBooks().then((bookList) {
       setState(() {
         entries = bookList;
-        save_entries = bookList;
-        trendingEntries = top_entriesList;
-        trendingMonthEntries = month_entriesList;
+        saveEntries = bookList;
+        trendingEntries = topEntries;
+        trendingMonthEntries = monthEntries;
       });
     });
   }
-  
- void searchBook(String query) {
-   setState(() {
-    if (query.isEmpty) {
-      entries = List.from(save_entries); // Khôi phục dữ liệu ban đầu nếu người dùng không nhập gì
-      return;
-    }
-    entries = save_entries.where((book) =>
-        book.title?.toLowerCase().contains(query.toLowerCase()) ?? false).toList();
-  });
-}
+
+  void searchBook(String query) {
+    setState(() {
+      if (query.isEmpty) {
+        entries = List.from(saveEntries); // Khôi phục dữ liệu ban đầu nếu người dùng không nhập gì
+        return;
+      }
+      entries = saveEntries
+          .where((book) => book.title?.toLowerCase().contains(query.toLowerCase()) ?? false)
+          .toList();
+    });
+  }
 
   final ScrollController _scrollController = ScrollController();
   void _scrollUp() {
@@ -90,9 +92,10 @@ class HomeScreenState extends State<HomeScreen> {
       curve: Curves.decelerate,
     );
   }
+
   @override
   Widget build(BuildContext context) {
-    final user = FirebaseAuth.instance.currentUser!;   
+    final user = FirebaseAuth.instance.currentUser!;
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: 69,
@@ -222,7 +225,7 @@ class HomeScreenState extends State<HomeScreen> {
                           ),
                         );
                       },
-                    ),    
+                    ),
                     const SizedBox(height: 20),
                   ],
                 ),
@@ -390,7 +393,7 @@ class HomeScreenState extends State<HomeScreen> {
                         behavior: HitTestBehavior.opaque,
                         onTap: () => showDialog(
                           context: context,
-                          builder: (context) => PreviewBox( 
+                          builder: (context) => PreviewBox(
                             title: entries[index].title!,
                             tags: entries[index].getTags()!,
                             description: entries[index].description!,

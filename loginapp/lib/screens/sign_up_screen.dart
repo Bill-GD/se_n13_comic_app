@@ -71,7 +71,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   controller: passwordController,
                   hintText: 'Password',
                   prefixIcon: Icon(Icons.password, color: kGreyBlue),
-                  obscureText: true,
+                  obscureText: obscureText,
                   keyboardType: TextInputType.visiblePassword,
                   inputAction: TextInputAction.done,
                   suffixIcon: InkWell(

@@ -10,8 +10,13 @@ class ChapterList extends StatefulWidget {
   final String title;
   final String chapter;
   final List<String> chapterList;
-  const ChapterList(
-      {super.key, required this.index, required this.title, required this.chapter, required this.chapterList});
+  const ChapterList({
+    super.key,
+    required this.index,
+    required this.title,
+    required this.chapter,
+    required this.chapterList,
+  });
 
   @override
   _ChapterListState createState() => _ChapterListState();
