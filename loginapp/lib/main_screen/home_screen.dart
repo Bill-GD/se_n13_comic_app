@@ -137,7 +137,7 @@ class HomeScreenState extends State<HomeScreen> {
             onPressed: () {} /*MỞ thanh thông báo*/,
             icon: const Icon(
               Icons.notifications,
-              color: Colors.amber,
+              color: Colors.yellow,
             ),
             iconSize: 40,
           )
