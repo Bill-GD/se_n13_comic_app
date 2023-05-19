@@ -63,6 +63,7 @@ class BookCaseScreenState extends State<BookCaseScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Danh sách yêu thích"),
+        backgroundColor: appBarBG,
       ),
       body: SingleChildScrollView(
         controller: _scrollController,

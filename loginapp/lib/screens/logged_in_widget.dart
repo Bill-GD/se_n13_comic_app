@@ -7,7 +7,6 @@ import 'package:loginapp/constant.dart';
 import '../homepage.dart';
 import '../provider/email_sign_in.dart';
 
-
 class LoggedInWidget extends StatelessWidget {
   final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
 
@@ -18,26 +17,28 @@ class LoggedInWidget extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: appBarBG,
-        title: const Text('Tài khoản', style: TextStyle(color: Colors.black),),
-        
+        title: Text(
+          'Tài khoản',
+          style: TextStyle(color: mainScreenText),
+        ),
         centerTitle: true,
         actions: [
           TextButton(
             onPressed: () async {
               await FirebaseAuthMethods(FirebaseAuth.instance).signOut(context);
-              
+
               // final provider =
               //     Provider.of<GoogleSignInProvider>(context, listen: false);
               //     provider.logout();
               // ignore: use_build_context_synchronously
               Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const HomePage()),
-                );
-              },
-            child: const Text(
+                context,
+                MaterialPageRoute(builder: (context) => const HomePage()),
+              );
+            },
+            child: Text(
               'Đăng xuất',
-               style: TextStyle(color: Colors.black),
+              style: TextStyle(color: mainScreenText),
             ),
           )
         ],
@@ -55,7 +56,7 @@ class LoggedInWidget extends StatelessWidget {
           ),
           CircleAvatar(
             radius: 40,
-            backgroundImage: NetworkImage(user.photoURL! ),
+            backgroundImage: NetworkImage(user.photoURL!),
           ),
           const SizedBox(
             height: 8,

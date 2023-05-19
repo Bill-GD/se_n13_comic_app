@@ -122,7 +122,7 @@ class SideBarState extends State<SideBar> {
                   color: iconColor,
                 ),
                 title: Text(
-                  'Dark Mode',
+                  'Chế độ tối',
                   style: TextStyle(
                     fontSize: 20,
                     color: mainScreenText,
