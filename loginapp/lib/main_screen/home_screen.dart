@@ -64,6 +64,7 @@ class HomeScreenState extends State<HomeScreen> {
   bool typing = false;
   bool showTrendingBar = false;
   bool showTrendingMonth = false;
+  final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
   @override
   void initState() {
     super.initState();
@@ -108,6 +109,26 @@ class HomeScreenState extends State<HomeScreen> {
       _scrollController.position.minScrollExtent,
       duration: const Duration(milliseconds: 300),
       curve: Curves.decelerate,
+    );
+  }
+
+  void showNotificationDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Truyện mới'),
+          content: const Text('Chưa có truyện mới nào'),
+          actions: [
+            ElevatedButton(
+              onPressed: () {
+                Navigator.of(context).pop(); // Đóng dialog
+              },
+              child: const Text('OK'),
+            ),
+          ],
+        );
+      },
     );
   }
 
@@ -160,7 +181,9 @@ class HomeScreenState extends State<HomeScreen> {
           ),
           // notifications
           IconButton(
-            onPressed: () {} /*MỞ thanh thông báo*/,
+            onPressed: () {
+              showNotificationDialog(context);
+            },
             icon: const Icon(
               Icons.notifications,
               color: Colors.yellow,
