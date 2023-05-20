@@ -1,12 +1,10 @@
-// import 'dart:async'; // unused import
-
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:loginapp/constant.dart';
 import 'package:loginapp/data/storedchapter.dart';
-// import 'package:loginapp/main_screen/story_screen.dart'; // unused import
-// import 'package:loginapp/utils/showSnackBar.dart'; // unused import
+import 'package:loginapp/main_screen/comment.dart';
 
 class BookPage extends StatefulWidget {
   final String cover;
@@ -31,7 +29,7 @@ class BookPage extends StatefulWidget {
 
 class BookPageState extends State<BookPage> {
   final ScrollController _childScrollController = ScrollController();
-
+  final user = FirebaseAuth.instance.currentUser!;
   late bool isFollowing = false;
 
   @override
@@ -204,6 +202,41 @@ class BookPageState extends State<BookPage> {
                   ),
                 ),
               ),
+              // comment
+              Center(
+                heightFactor: 2,
+                child: GestureDetector(
+                  behavior: HitTestBehavior.opaque,
+                  onTap: () => showComments(
+                    context,
+                    tieuDe: widget.title,
+                    postId: user.email!,
+                    ownerId: user.displayName!,
+                    mediaUrl: user.photoURL!,
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(
+                        Icons.chat,
+                        size: 50.0,
+                        color: commentButton,
+                      ),
+                      Align(
+                        alignment: Alignment.center,
+                        child: Text(
+                          'Bình luận',
+                          style: TextStyle(
+                            fontSize: 20,
+                            color: mainScreenText,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+              ),
               // chapter list
               Center(
                 child: Padding(
@@ -295,4 +328,19 @@ class BookPageState extends State<BookPage> {
           ),
         ),
       );
+}
+
+showComments(BuildContext context,
+    {required String tieuDe,
+    required String postId,
+    required String ownerId,
+    required String mediaUrl}) {
+  Navigator.push(context, MaterialPageRoute(builder: (context) {
+    return Comments(
+      title: tieuDe,
+      postId: postId,
+      postOwnerId: ownerId,
+      postMediaUrl: mediaUrl,
+    );
+  }));
 }

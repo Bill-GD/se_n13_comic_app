@@ -41,6 +41,9 @@ class HomeScreenState extends State<HomeScreen> {
       mainScreenText = _isDarkTheme
           ? const Color.fromARGB(255, 255, 255, 255)
           : const Color.fromARGB(255, 0, 0, 0);
+      mainScreenTextLight = _isDarkTheme
+          ? const Color.fromARGB(255, 196, 196, 196)
+          : const Color.fromARGB(255, 70, 70, 70);
       iconColor = _isDarkTheme
           ? const Color.fromARGB(255, 255, 255, 255)
           : const Color.fromARGB(255, 100, 100, 100);
@@ -50,6 +53,7 @@ class HomeScreenState extends State<HomeScreen> {
       shadow = _isDarkTheme
           ? const Color.fromARGB(255, 130, 130, 130)
           : const Color.fromARGB(255, 199, 199, 199);
+      commentButton = _isDarkTheme ? iconColor : Colors.greenAccent;
       iconTheme = _isDarkTheme ? Icons.brightness_3 : Icons.sunny;
       iconThemeToggle = _isDarkTheme ? Icons.toggle_on : Icons.toggle_off_outlined;
     });
