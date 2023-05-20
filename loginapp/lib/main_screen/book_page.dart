@@ -1,12 +1,10 @@
-import 'dart:async';
-
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:loginapp/constant.dart';
 import 'package:loginapp/data/storedchapter.dart';
-import 'package:loginapp/main_screen/story_screen.dart';
-import 'package:loginapp/utils/showSnackBar.dart';
+import 'package:loginapp/main_screen/comment.dart';
 
 class BookPage extends StatefulWidget {
   final String cover;
@@ -31,19 +29,20 @@ class BookPage extends StatefulWidget {
 
 class BookPageState extends State<BookPage> {
   final ScrollController _childScrollController = ScrollController();
-
+  final user = FirebaseAuth.instance.currentUser!;
   late bool isFollowing = false;
-
   @override
   void initState() {
     super.initState();
-    DatabaseReference starCountRef =
-        FirebaseDatabase.instance.ref('books').child(widget.title).child('follow');
-        starCountRef.onValue.listen((DatabaseEvent event) {
-            bool data = event.snapshot.value as bool;
-            setState(() {
-                            isFollowing = data;
-                          }); 
+    DatabaseReference starCountRef = FirebaseDatabase.instance
+        .ref('books')
+        .child(widget.title)
+        .child('follow');
+    starCountRef.onValue.listen((DatabaseEvent event) {
+      bool data = event.snapshot.value as bool;
+      setState(() {
+        isFollowing = data;
+      });
     });
   }
 
@@ -71,7 +70,8 @@ class BookPageState extends State<BookPage> {
                   children: [
                     // cover
                     Padding(
-                      padding: const EdgeInsetsDirectional.fromSTEB(0, 30, 0, 0),
+                      padding:
+                          const EdgeInsetsDirectional.fromSTEB(0, 30, 0, 0),
                       // use network when working with database
                       child: Image.network(
                         widget.cover,
@@ -80,7 +80,8 @@ class BookPageState extends State<BookPage> {
                     ),
                     // title
                     Padding(
-                      padding: const EdgeInsetsDirectional.fromSTEB(0, 30, 0, 0),
+                      padding:
+                          const EdgeInsetsDirectional.fromSTEB(0, 30, 0, 0),
                       child: Text(
                         widget.title,
                         textAlign: TextAlign.center,
@@ -95,7 +96,8 @@ class BookPageState extends State<BookPage> {
                     Container(
                       alignment: Alignment.centerLeft,
                       child: Padding(
-                        padding: const EdgeInsetsDirectional.fromSTEB(0, 30, 0, 0),
+                        padding:
+                            const EdgeInsetsDirectional.fromSTEB(0, 30, 0, 0),
                         child: Expanded(
                           child: RichText(
                             text: TextSpan(
@@ -124,7 +126,8 @@ class BookPageState extends State<BookPage> {
                     Container(
                       alignment: Alignment.centerLeft,
                       child: Padding(
-                        padding: const EdgeInsetsDirectional.fromSTEB(0, 30, 0, 0),
+                        padding:
+                            const EdgeInsetsDirectional.fromSTEB(0, 30, 0, 0),
                         child: Expanded(
                           child: RichText(
                             text: TextSpan(
@@ -152,7 +155,8 @@ class BookPageState extends State<BookPage> {
                     // description
                     Center(
                       child: Padding(
-                        padding: const EdgeInsetsDirectional.fromSTEB(0, 30, 0, 20),
+                        padding:
+                            const EdgeInsetsDirectional.fromSTEB(0, 30, 0, 20),
                         child: Expanded(
                           child: Text(
                             widget.description,
@@ -181,15 +185,21 @@ class BookPageState extends State<BookPage> {
                             isFollowing = !isFollowing;
                           });
                           // cập nhật trạng thái follow lên firebase
-                          final databaseReference = FirebaseDatabase.instance.ref();
-                          databaseReference.child('books').child(widget.title).update({
-                            'follow': isFollowing
-                          });
-                        },// follow function
+                          final databaseReference =
+                              FirebaseDatabase.instance.ref();
+                          databaseReference
+                              .child('books')
+                              .child(widget.title)
+                              .update({'follow': isFollowing});
+                        }, // follow function
                         style: ButtonStyle(
-                          padding: MaterialStateProperty.resolveWith((states) => const EdgeInsetsDirectional.fromSTEB(10, 10, 10, 10)),
-                          backgroundColor: MaterialStateColor.resolveWith((states) => appBarBG),
-                          overlayColor: MaterialStateColor.resolveWith((states) => appBarBGLight),
+                          padding: MaterialStateProperty.resolveWith((states) =>
+                              const EdgeInsetsDirectional.fromSTEB(
+                                  10, 10, 10, 10)),
+                          backgroundColor: MaterialStateColor.resolveWith(
+                              (states) => appBarBG),
+                          overlayColor: MaterialStateColor.resolveWith(
+                              (states) => appBarBGLight),
                         ),
                         icon: Icon(
                           FontAwesomeIcons.solidHeart,
@@ -205,6 +215,23 @@ class BookPageState extends State<BookPage> {
                         ),
                       ),
                     ),
+                  ),
+                ),
+              ),
+              Center(
+                heightFactor: 2,
+                child: GestureDetector(
+                  onTap: () => showComments(
+                    context,
+                    TieuDe: widget.title,
+                    postId: user.email!,
+                    ownerId: user.displayName!,
+                    mediaUrl: user.photoURL!,
+                  ),
+                  child: const Icon(
+                    Icons.chat,
+                    size: 50.0,
+                    color: Colors.greenAccent,
                   ),
                 ),
               ),
@@ -255,12 +282,18 @@ class BookPageState extends State<BookPage> {
                             onPressed: () {
                               Navigator.push(
                                 context,
-                                MaterialPageRoute(builder: (context) => ChapterList(title: widget.title, chapter: widget.chapterList[(widget.chapterList.length - index).abs() - 1])),
+                                MaterialPageRoute(
+                                    builder: (context) => ChapterList(
+                                        title: widget.title,
+                                        chapter: widget.chapterList[
+                                            (widget.chapterList.length - index)
+                                                    .abs() -
+                                                1])),
                               );
                             },
-
                             style: ButtonStyle(
-                              backgroundColor: MaterialStatePropertyAll(mainScreenBG),
+                              backgroundColor:
+                                  MaterialStatePropertyAll(mainScreenBG),
                               shape: MaterialStateProperty.all(
                                 RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(5),
@@ -270,11 +303,12 @@ class BookPageState extends State<BookPage> {
                                   ),
                                 ),
                               ),
-                              overlayColor:
-                                  MaterialStateColor.resolveWith((states) => appBarBGLight),
+                              overlayColor: MaterialStateColor.resolveWith(
+                                  (states) => appBarBGLight),
                             ),
                             child: Text(
-                              widget.chapterList[widget.chapterList.length - 1 -index],
+                              widget.chapterList[
+                                  widget.chapterList.length - 1 - index],
                               textAlign: TextAlign.center,
                               style: TextStyle(
                                 fontSize: 30,
@@ -292,4 +326,19 @@ class BookPageState extends State<BookPage> {
           ),
         ),
       );
+}
+
+showComments(BuildContext context,
+    {required String TieuDe,
+    required String postId,
+    required String ownerId,
+    required String mediaUrl}) {
+  Navigator.push(context, MaterialPageRoute(builder: (context) {
+    return Comments(
+      title: TieuDe,
+      postId: postId,
+      postOwnerId: ownerId,
+      postMediaUrl: mediaUrl,
+    );
+  }));
 }
