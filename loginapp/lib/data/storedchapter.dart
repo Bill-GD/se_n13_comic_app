@@ -35,8 +35,11 @@ class _ChapterListState extends State<ChapterList> {
 
   Future<void> fetchData() async {
     if (_isLoading) {
-      final databaseReference = FirebaseDatabase.instance.ref('chapter');
-      final snapshot = await databaseReference.child(widget.title).child(widget.chapter).once();
+      final databaseReference = FirebaseDatabase.instance
+          .ref('chapter')
+          .child(widget.title)
+          .child(widget.chapter);
+      final snapshot = await databaseReference.once();
       List<dynamic> chapsJson = snapshot.snapshot.value as List<dynamic>;
       for (var value in chapsJson) {
         chapterList.add(value as String);

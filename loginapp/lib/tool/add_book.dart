@@ -244,8 +244,10 @@ class AddBook extends StatelessWidget {
                     saveData(newBook);
                   },
                   style: ButtonStyle(
-                    backgroundColor: MaterialStateColor.resolveWith((states) => appBarBG),
-                    overlayColor: MaterialStateColor.resolveWith((states) => appBarBGLight),
+                    backgroundColor:
+                        MaterialStateColor.resolveWith((states) => appBarBG),
+                    overlayColor: MaterialStateColor.resolveWith(
+                        (states) => appBarBGLight),
                   ),
                   child: const Text('Đăng truyện mới'),
                 ),
@@ -254,6 +256,7 @@ class AddBook extends StatelessWidget {
           ],
         ),
       ),
+      resizeToAvoidBottomInset: false,
     );
   }
 }

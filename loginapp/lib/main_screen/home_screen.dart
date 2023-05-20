@@ -55,7 +55,8 @@ class HomeScreenState extends State<HomeScreen> {
           : const Color.fromARGB(255, 199, 199, 199);
       commentButton = _isDarkTheme ? iconColor : Colors.greenAccent;
       iconTheme = _isDarkTheme ? Icons.brightness_3 : Icons.sunny;
-      iconThemeToggle = _isDarkTheme ? Icons.toggle_on : Icons.toggle_off_outlined;
+      iconThemeToggle =
+          _isDarkTheme ? Icons.toggle_on : Icons.toggle_off_outlined;
     });
   }
 
@@ -76,14 +77,27 @@ class HomeScreenState extends State<HomeScreen> {
     });
   }
 
+  void refreshPage() {
+    getBooks().then((bookList) {
+      setState(() {
+        entries = bookList;
+        saveEntries = bookList;
+        trendingEntries = topEntries;
+        trendingMonthEntries = monthEntries;
+      });
+    });
+  }
+
   void searchBook(String query) {
     setState(() {
       if (query.isEmpty) {
-        entries = List.from(saveEntries); // Khôi phục dữ liệu ban đầu nếu người dùng không nhập gì
+        entries = List.from(
+            saveEntries); // Khôi phục dữ liệu ban đầu nếu người dùng không nhập gì
         return;
       }
       entries = saveEntries
-          .where((book) => book.title?.toLowerCase().contains(query.toLowerCase()) ?? false)
+          .where((book) =>
+              book.title?.toLowerCase().contains(query.toLowerCase()) ?? false)
           .toList();
     });
   }
@@ -123,6 +137,14 @@ class HomeScreenState extends State<HomeScreen> {
         ),
         automaticallyImplyLeading: false,
         actions: [
+          //refresh
+          IconButton(
+            onPressed: refreshPage,
+            icon: const Icon(
+              Icons.refresh,
+            ),
+            iconSize: 40,
+          ),
           // search
           IconButton(
             onPressed: () {
@@ -278,10 +300,12 @@ class HomeScreenState extends State<HomeScreen> {
                               builder: (context) => PreviewBox(
                                 cover: trendingEntries[index].cover!,
                                 title: trendingEntries[index].title!,
-                                description: trendingEntries[index].description!,
+                                description:
+                                    trendingEntries[index].description!,
                                 tags: trendingEntries[index].getTags()!,
                                 author: trendingEntries[index].author!,
-                                chapterList: trendingEntries[index].chapterList!,
+                                chapterList:
+                                    trendingEntries[index].chapterList!,
                               ),
                             ),
                             child: TrendingBar(
@@ -339,11 +363,13 @@ class HomeScreenState extends State<HomeScreen> {
                               context: context,
                               builder: (context) => PreviewBox(
                                 cover: trendingMonthEntries[index].cover!,
-                                description: trendingMonthEntries[index].description!,
+                                description:
+                                    trendingMonthEntries[index].description!,
                                 tags: trendingMonthEntries[index].getTags()!,
                                 title: trendingMonthEntries[index].title!,
                                 author: trendingMonthEntries[index].author!,
-                                chapterList: trendingMonthEntries[index].chapterList!,
+                                chapterList:
+                                    trendingMonthEntries[index].chapterList!,
                               ),
                             ),
                             child: TrendingBar(
@@ -437,7 +463,8 @@ class HomeScreenState extends State<HomeScreen> {
               },
               style: ButtonStyle(
                 backgroundColor: MaterialStatePropertyAll(buttonBG),
-                overlayColor: MaterialStateProperty.resolveWith((states) => buttonBGLight),
+                overlayColor: MaterialStateProperty.resolveWith(
+                    (states) => buttonBGLight),
               ),
               child: Row(
                 children: const [
@@ -461,7 +488,8 @@ class HomeScreenState extends State<HomeScreen> {
               },
               style: ButtonStyle(
                 backgroundColor: MaterialStatePropertyAll(buttonBG),
-                overlayColor: MaterialStateProperty.resolveWith((states) => buttonBGLight),
+                overlayColor: MaterialStateProperty.resolveWith(
+                    (states) => buttonBGLight),
               ),
               child: Row(
                 children: const [
