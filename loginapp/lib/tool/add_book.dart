@@ -238,7 +238,7 @@ class AddBook extends StatelessWidget {
                         description: txtNoidung.text,
                         cover: txturlanh.text,
                         author: txtTacgia.text,
-                        chapterList: ["Chương1", "Chương 2", "Chương 3"],
+                        chapterList: ["Chương 1", "Chương 2", "Chương 3"],
                         status: 0,
                         follow: false);
                     saveData(newBook);
