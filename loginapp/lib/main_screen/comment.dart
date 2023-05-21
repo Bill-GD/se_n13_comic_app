@@ -48,7 +48,7 @@ class CommentsState extends State<Comments> {
   addComment() {
     commentsRef
         .child(tieude)
-        .child(postId.replaceFirst('@gmail.com', ''))
+        // .child(postId.replaceFirst('@gmail.com', ''))
         .child('comments')
         .push()
         .set({
@@ -65,7 +65,7 @@ class CommentsState extends State<Comments> {
     return StreamBuilder(
       stream: commentsRef
           .child(tieude)
-          .child(postId.replaceFirst('@gmail.com', ''))
+          // .child(postId.replaceFirst('@gmail.com', ''))
           .child('comments')
           .orderByChild("timestamp")
           .onValue,
